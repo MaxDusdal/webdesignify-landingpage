@@ -1,11 +1,12 @@
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Code, Layout, Zap } from 'lucide-react';
 import { MyLottieComponentDynamic } from './hero-lottie';
+import Link from 'next/link';
 export default function Hero() {
     return (
         <section className='relative overflow-hidden py-20 md:py-32 bg-secondary text-secondary-foreground'>
             <div className='container px-4 md:px-6 mx-auto max-w-screen-xl'>
-                <div className='flex flex-col gap-12 lg: grid lg:grid-cols-2 lg:gap-16 items-center '>
+                <div className='flex flex-col gap-12 lg:grid lg:grid-cols-2 lg:gap-16 items-center '>
                     <div className='flex flex-col gap-6 lg:order-first order-last'>
                         <h1 className='text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl'>
                             <span className='text-accent'>Digitale Lösungen,</span> die dein Unternehmen voranbringen.
@@ -15,9 +16,11 @@ export default function Hero() {
                             einzahlen.
                         </p>
                         <div className='flex flex-col sm:flex-row gap-4 mt-2'>
-                            <Button size='lg' className='group'>
-                                Lass uns über dein Projekt reden
-                                <ArrowRight className='ml-2 h-4 w-4 transition-transform group-hover:translate-x-1' />
+                            <Button size='lg' className='group' asChild>
+                                <Link href='/kontakt'>
+                                    Lass uns über dein Projekt reden
+                                    <ArrowRight className='ml-2 h-4 w-4 transition-transform group-hover:translate-x-1' />
+                                </Link>
                             </Button>
                         </div>
 

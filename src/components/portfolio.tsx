@@ -106,7 +106,7 @@ export default function Portfolio() {
 
   return (
     <section id="portfolio" className="w-full py-12 md:py-24 bg-background">
-      <div className="container px-4 md:px-6">
+      <div className="container px-4 md:px-6 mx-auto max-w-7xl">
         <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
           <div className="space-y-2">
             <h2 className="text-3xl font-bold tracking-tighter md:text-4xl">Case Studies</h2>
@@ -120,7 +120,7 @@ export default function Portfolio() {
           onTouchEnd={handleTouchEnd}
         >
           {/* Project Info - 1/4 width on desktop */}
-          <div className="flex flex-col justify-between bg-card rounded-lg border border-border/40 p-6 shadow-sm">
+          <div className="flex flex-col justify-between  p-6">
             <div>
               <div className="space-y-6 mb-8">
                 {activeCase.kpis.map((kpi, index) => (

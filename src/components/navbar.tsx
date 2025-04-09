@@ -35,7 +35,9 @@ export default function Navbar() {
           <Link href="#about" className="text-muted-foreground hover:text-foreground transition-colors">
             About
           </Link>
-          <Button variant="default">Get in Touch</Button>
+          <Button variant="default" asChild>
+            <Link href="/kontakt">Kontakt aufnehmen</Link>
+          </Button>
         </nav>
 
         <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
@@ -76,7 +78,7 @@ export default function Navbar() {
               About
             </Link>
             <Button variant="default" className="w-full" onClick={() => setIsMenuOpen(false)}>
-              Get in Touch
+              Kontakt aufnehmen
             </Button>
           </nav>
         </div>

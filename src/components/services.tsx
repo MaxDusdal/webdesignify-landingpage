@@ -35,7 +35,7 @@ export default function Services() {
 
     return (
         <section id='services' className='w-full py-12 md:py-24 bg-background/50'>
-            <div className='container px-4 md:px-6'>
+            <div className='container px-4 md:px-6 mx-auto max-w-7xl'>
                 <div className='flex flex-col items-center justify-center space-y-4 text-center mb-12'>
                     <div className='space-y-2'>
                         <h2 className='text-3xl font-bold tracking-tighter md:text-4xl'>Was ich Ihnen anbiete</h2>
