@@ -1,22 +1,31 @@
-import type { Metadata } from 'next'
-import '@/styles/globals.css'
+import type { Metadata } from 'next';
+import '@/styles/globals.css';
+import dynamic from 'next/dynamic';
+import { PHProvider } from '@/providers/posthog-provider';
+import Banner from '@/components/cookie-banner';
+const PostHogPageView = dynamic(() => import('@/components/PostHogPageView'), {
+    ssr: false,
+});
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.dev',
-}
+    title: 'Webdesignify',
+    description: 'Webdesign und Webentwicklung für kleine und mittlere Unternehmen',
+};
 
 export default function RootLayout({
-  children,
+    children,
 }: Readonly<{
-  children: React.ReactNode
+    children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body>
-        {children}
-      </body>
-    </html>
-  )
+    return (
+        <html lang='en'>
+            <body>
+                <PHProvider>
+                    <PostHogPageView />
+                    {children}
+                    <Banner />
+                </PHProvider>
+            </body>
+        </html>
+    );
 }

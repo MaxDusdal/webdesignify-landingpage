@@ -7,7 +7,7 @@ import { getPayload } from 'payload';
 import { PayloadLexicalReactRenderer, PayloadLexicalReactRendererContent } from '@atelier-disko/payload-lexical-react-renderer';
 import { customElementRenderers } from '@/lib/lexicalRenderers';
 import { RefreshRouteOnSave } from '@/components/refresh-route-on-save';
-
+import { Author, Blog, Media } from '../../../../../payload-types';
 export default async function BlogPost({ params }: { params: { slug: string } }) {
     const payload = await getPayload({ config: payloadConfig });
     const posts = await payload.find({
@@ -15,6 +15,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
         where: {
             slug: { equals: params.slug },
         },
+        depth: 2,
     });
 
     const relatedPosts = await payload.find({
@@ -24,14 +25,14 @@ export default async function BlogPost({ params }: { params: { slug: string } })
         },
     });
 
-    const postData = posts.docs[0];
-    console.log(postData);
+    const postData = posts.docs[0] as Blog & { author: Author };
 
+    const postImage = postData.image as Media;
+    const authorImage = postData.author?.image as Media;
     return (
         <main>
-            {/* Hero Section */}
             <div className='relative w-full h-[300px] md:h-[400px] lg:h-[500px] overflow-hidden'>
-                <Image src={postData.image?.url ?? '/placeholder.svg'} alt={postData.title} fill className='object-cover' priority />
+                <Image src={postImage.url ?? '/placeholder.svg'} alt={postData.title} fill className='object-cover' priority />
                 <div className='absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent'></div>
             </div>
 
@@ -46,12 +47,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
                     <div className='flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-8 pb-8 border-b border-border/40'>
                         <div className='flex items-center gap-2'>
                             <div className='relative w-8 h-8 rounded-full overflow-hidden'>
-                                <Image
-                                    src={postData.author?.image?.url ?? '/placeholder.svg'}
-                                    alt={postData.author?.name ?? ''}
-                                    fill
-                                    className='object-cover'
-                                />
+                                <Image src={authorImage.url ?? '/placeholder.svg'} alt={postData.author?.name ?? ''} fill className='object-cover' />
                             </div>
                             <span>{postData.author?.name}</span>
                         </div>
@@ -78,12 +74,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
                     {/* Author Bio */}
                     <div className='mt-12 p-6 bg-card rounded-lg border border-border/40 flex flex-col md:flex-row gap-6 items-center md:items-start'>
                         <div className='relative w-20 h-20 rounded-full overflow-hidden flex-shrink-0'>
-                            <Image
-                                src={postData.author?.image?.url ?? '/placeholder.svg'}
-                                alt={postData.author?.name ?? ''}
-                                fill
-                                className='object-cover'
-                            />
+                            <Image src={authorImage.url ?? '/placeholder.svg'} alt={postData.author?.name ?? ''} fill className='object-cover' />
                         </div>
                         <div>
                             <h3 className='text-lg font-bold mb-2'>About {postData.author?.name}</h3>
@@ -107,7 +98,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
                                 >
                                     <div className='relative h-[140px] w-full overflow-hidden'>
                                         <Image
-                                            src={relatedPost.image?.url || '/placeholder.svg'}
+                                            src={(relatedPost.image as Media).url || '/placeholder.svg'}
                                             alt={relatedPost.title}
                                             fill
                                             className='object-cover transition-transform duration-500 group-hover:scale-105'
@@ -143,13 +134,14 @@ export async function generateMetadata({ params }: { params: { slug: string } })
         where: { slug: { equals: params.slug } },
     });
 
-    const postData = post.docs[0];
+    const postData = post.docs[0] as Blog & { author: Author };
+    const postImage = postData.image as Media;
 
     return {
         title: postData.meta?.title || postData.title,
         description: postData.meta?.description || postData.excerpt,
         openGraph: {
-            images: [postData.meta?.image?.url || postData.image?.url],
+            images: [postImage.url || '/placeholder.svg'],
         },
     };
-}   
+}
