@@ -11,16 +11,18 @@ import { Author } from './(payload)/collections/author';
 import { Impressum } from './(payload)/globals/impressum';
 import { Datenschutz } from './(payload)/globals/datenschutz';
 import { seoPlugin } from '@payloadcms/plugin-seo';
+import { FAQ } from '@/app/(payload)/globals/faq';
+import { CaseStudies } from '@/app/(payload)/collections/case-studies';
 
 export default buildConfig({
     // If you'd like to use Rich Text, pass your editor here
     editor: lexicalEditor(),
 
     // Define and configure your collections in this array
-    collections: [Media, Blog, Author],
+    collections: [Media, Blog, Author, CaseStudies],
 
     // Define and configure your globals in this array
-    globals: [Impressum, Datenschutz],
+    globals: [Impressum, Datenschutz, FAQ],
 
     // Your Payload secret - should be a complex and secure string, unguessable
     secret: process.env.PAYLOAD_SECRET || '',
@@ -64,7 +66,6 @@ export default buildConfig({
             tabbedUI: true,
             generateURL: ({ doc }) => `https://webdesignify.de/blog/${doc.slug}`,
         }),
-            
     ],
     i18n: {
         supportedLanguages: { de, en },

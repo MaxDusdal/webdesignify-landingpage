@@ -2,6 +2,8 @@
 
 import { LucideIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { motion } from 'framer-motion';
+import { cn } from '@/lib/utils';
 
 interface ButtonProps {
     text: string;
@@ -18,6 +20,8 @@ interface HeaderSectionProps {
     animate?: boolean;
     className?: string;
     headerType?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+    variant?: 'default' | 'secondary';
+    align?: 'center' | 'left';
 }
 
 export default function HeaderSection({
@@ -28,38 +32,79 @@ export default function HeaderSection({
     buttons,
     animate = true,
     className = '',
+    variant = 'default',
+    align = 'center',
 }: HeaderSectionProps) {
     const HeaderTag = headerType;
+    
+    // Animation variants
+    const fadeInUp = {
+        hidden: { opacity: 0, y: 50 },
+        visible: (i: number) => ({
+            opacity: 1,
+            y: 0,
+            transition: {
+                delay: i * 0.1,
+                duration: 0.5,
+            },
+        }),
+    };
+    
     return (
-        <section className={`w-full py-8 md:py-12 lg:py-16 ${className}`}>
-            <div className='container px-4 md:px-6 mx-auto max-w-7xl'>
-                <div className='flex flex-col items-center text-center max-w-3xl mx-auto'>
+        <section className={cn(`w-full py-4 md:py-4 lg:py-8`, className)}>
+            <div className='container  mx-auto max-w-7xl'>
+                <div className={cn(
+                    'flex flex-col max-w-3xl', 
+                    align === 'center' ? 'items-center text-center mx-auto' : 'items-start text-left'
+                )}>
                     {subtitle && (
-                        <p
-                            className='text-sm md:text-base font-black uppercase font-stretch-200% text-black mb-2 transform transition-transform duration-500 ease-in-out opacity-0'
-                            style={animate ? { animation: `fadeInUp 0.5s forwards 0.1s` } : undefined}
+                        <motion.p
+                            className={cn(
+                                'text-sm md:text-base font-black uppercase font-stretch-200% mb-2',
+                                variant === 'default' ? 'text-black' : 'text-secondary-foreground'
+                            )}
+                            initial={animate ? "hidden" : "visible"}
+                            animate="visible"
+                            variants={fadeInUp}
+                            custom={1}
                         >
                             {subtitle}
-                        </p>
+                        </motion.p>
                     )}
-                    <HeaderTag
-                        className='text-3xl md:text-5xl font-extrabold tracking-tighter text-secondary mb-4 transform transition-transform duration-500 ease-in-out opacity-0'
-                        style={animate ? { animation: `fadeInUp 0.5s forwards 0.2s` } : undefined}
+                    <motion.div
+                        initial={animate ? "hidden" : "visible"}
+                        animate="visible" 
+                        variants={fadeInUp}
+                        custom={2}
                     >
-                        {title}
-                    </HeaderTag>
+                        <HeaderTag className={cn(
+                            'text-3xl md:text-5xl font-extrabold tracking-tighter mb-4',
+                            variant === 'default' ? 'text-secondary' : 'text-secondary-foreground'
+                        )}>
+                            {title}
+                        </HeaderTag>
+                    </motion.div>
                     {description && (
-                        <p
-                            className='text-lg md:text-xl mb-8 font-light transform transition-transform duration-500 ease-in-out opacity-0'
-                            style={animate ? { animation: `fadeInUp 0.5s forwards 0.3s` } : undefined}
+                        <motion.p
+                            className={cn(
+                                'text-lg md:text-xl',
+                                variant === 'default' ? 'font-light' : 'text-secondary-foreground/90'
+                            )}
+                            initial={animate ? "hidden" : "visible"}
+                            animate="visible"
+                            variants={fadeInUp}
+                            custom={3}
                         >
                             {description}
-                        </p>
+                        </motion.p>
                     )}
                     {buttons && buttons.length > 0 && (
-                        <div
-                            className='flex flex-col sm:flex-row gap-4 transform transition-transform duration-500 ease-in-out opacity-0'
-                            style={animate ? { animation: `fadeInUp 0.5s forwards 0.4s` } : undefined}
+                        <motion.div
+                            className='flex flex-col sm:flex-row gap-4 mt-8'
+                            initial={animate ? "hidden" : "visible"}
+                            animate="visible"
+                            variants={fadeInUp}
+                            custom={4}
                         >
                             {buttons.map((button, index) => {
                                 const Icon = button.icon;
@@ -67,7 +112,7 @@ export default function HeaderSection({
                                     <Button
                                         key={index}
                                         size='lg'
-                                        variant={button.variant || 'default'}
+                                        variant={button.variant || (variant === 'secondary' ? 'link' : 'default')}
                                         className={button.icon ? 'group' : ''}
                                         onClick={button.onClick}
                                     >
@@ -76,24 +121,10 @@ export default function HeaderSection({
                                     </Button>
                                 );
                             })}
-                        </div>
+                        </motion.div>
                     )}
                 </div>
             </div>
-            {animate && (
-                <style jsx>{`
-                    @keyframes fadeInUp {
-                        from {
-                            opacity: 0;
-                            transform: translateY(50px);
-                        }
-                        to {
-                            opacity: 1;
-                            transform: translateY(0);
-                        }
-                    }
-                `}</style>
-            )}
         </section>
     );
 } 

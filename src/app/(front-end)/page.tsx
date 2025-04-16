@@ -4,7 +4,7 @@ import Services from '@/components/services';
 import Differentiators from '@/components/differentiators';
 import Portfolio from '@/components/portfolio';
 import Blog from '@/components/blog';
-
+import FAQSection from '@/components/faq-section';
 export default function Home() {
     return (
         <>
@@ -13,6 +13,7 @@ export default function Home() {
             <Services />
             <Differentiators />
             <Portfolio />
+            <FAQSection />
             <Blog />
         </>
     );

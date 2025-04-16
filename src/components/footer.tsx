@@ -1,10 +1,47 @@
+'use client';
+
 import Link from 'next/link';
-import { Github, Instagram, Linkedin, Mail, Twitter } from 'lucide-react';
+import { Github, Linkedin, Mail } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { usePathname } from 'next/navigation';
 
 export default function Footer() {
+    const pathname = usePathname();
+    const isContactPage = pathname === '/kontakt';
+    
     return (
-        <footer className='border-t border-border/40 bg-background'>
-            <div className='container px-4 md:px-6 py-12 mx-auto max-w-screen-lg'>
+        <footer className={isContactPage 
+            ? 'bg-background border-t border-border' 
+            : 'relative mt-22 pt-24 md:pt-20 bg-background border-t border-border'
+        }>
+            {/* CTA Card - Only shown when not on contact page */}
+            {!isContactPage && (
+                <div className='absolute -top-22 left-1/2 transform -translate-x-1/2 w-full max-w-3xl'>
+                    <div className='mx-4 md:mx-6 bg-secondary rounded-lg shadow-xl overflow-hidden'>
+                        <div className='relative p-8 md:p-10'>
+                            <div className='absolute top-0 right-0 w-40 h-40 bg-secondary-foreground/5 rounded-full translate-x-16 -translate-y-16'></div>
+                            <div className='absolute bottom-0 left-0 w-24 h-24 bg-secondary-foreground/5 rounded-full -translate-x-10 translate-y-10'></div>
+                            
+                            <div className='relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6'>
+                                <div className='space-y-2 max-w-lg'>
+                                    <h3 className='text-xl md:text-2xl font-bold text-secondary-foreground'>Bereit für Ihre digitale Transformation?</h3>
+                                    <p className='text-secondary-foreground/80'>Lassen Sie uns gemeinsam Ihre Online-Präsenz auf das nächste Level bringen.</p>
+                                </div>
+                                <Button variant="default" className="group whitespace-nowrap">
+                                    <Link href='/kontakt'>
+                                        Kontakt aufnehmen
+                                    </Link>
+                                </Button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            <div className={isContactPage
+                ? 'container px-4 md:px-6 py-12 mx-auto max-w-screen-lg'
+                : 'container px-4 md:px-6 py-16 mx-auto max-w-screen-lg'
+            }>
                 <div className='grid gap-8 md:grid-cols-2 lg:grid-cols-4'>
                     <div className='space-y-4'>
                         <div className='flex items-center gap-2'>
@@ -32,35 +69,25 @@ export default function Footer() {
                         <h3 className='text-lg font-medium'>Services</h3>
                         <ul className='space-y-2 text-sm'>
                             <li>
-                                <Link href='#' className='text-muted-foreground hover:text-foreground transition-colors'>
-                                    Web Design
+                                <Link href='/services/strategie-optimierung' className='text-muted-foreground hover:text-foreground transition-colors'>
+                                    Strategie-Optimierung
                                 </Link>
                             </li>
                             <li>
-                                <Link href='#' className='text-muted-foreground hover:text-foreground transition-colors'>
-                                    Web Development
+                                <Link href='/services/webdesign' className='text-muted-foreground hover:text-foreground transition-colors'>
+                                    Webentwicklung
                                 </Link>
                             </li>
                             <li>
-                                <Link href='#' className='text-muted-foreground hover:text-foreground transition-colors'>
-                                    Custom Web Applications
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href='#' className='text-muted-foreground hover:text-foreground transition-colors'>
-                                    E-commerce Solutions
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href='#' className='text-muted-foreground hover:text-foreground transition-colors'>
-                                    SEO Optimization
+                                <Link href='/services/it-loesungen' className='text-muted-foreground hover:text-foreground transition-colors'>
+                                    IT-Lösungen
                                 </Link>
                             </li>
                         </ul>
                     </div>
 
                     <div className='space-y-4'>
-                        <h3 className='text-lg font-medium'>Resources</h3>
+                        <h3 className='text-lg font-medium'>Resourcen</h3>
                         <ul className='space-y-2 text-sm'>
                             <li>
                                 <Link href='#' className='text-muted-foreground hover:text-foreground transition-colors'>
@@ -73,13 +100,8 @@ export default function Footer() {
                                 </Link>
                             </li>
                             <li>
-                                <Link href='#' className='text-muted-foreground hover:text-foreground transition-colors'>
+                                <Link href='/blog' className='text-muted-foreground hover:text-foreground transition-colors'>
                                     Blog
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href='#' className='text-muted-foreground hover:text-foreground transition-colors'>
-                                    Testimonials
                                 </Link>
                             </li>
                             <li>
@@ -95,17 +117,9 @@ export default function Footer() {
                         <ul className='space-y-2 text-sm'>
                             <li className='flex items-start gap-2'>
                                 <Mail className='h-5 w-5 text-muted-foreground' />
-                                <span className='text-muted-foreground'>hallo@webdesignify.com</span>
+                                <span className='text-muted-foreground'>hi@webdesignify.de</span>
                             </li>
                         </ul>
-                        <div className='pt-4'>
-                            <Link
-                                href='#contact'
-                                className='inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring'
-                            >
-                                Get in Touch
-                            </Link>
-                        </div>
                     </div>
                 </div>
 

@@ -11,7 +11,7 @@ export default function Services() {
             icon: TrendingUp,
         },
         {
-            id: 'webseite',
+            id: 'webdesign',
             title: 'Webseite',
             description:
                 'Ich konzipiere, designe und programmiere Ihre Webseite aus einer Hand und sorge dafür, dass ihre Webseite elegant, erfolgreich und nutzerfreundlich ist.',
@@ -26,6 +26,7 @@ export default function Services() {
         },
         {
             id: 'beratung',
+            link: '/kontakt',
             title: 'Beratung',
             description:
                 'Sie möchten von der Reichweite des Online-Marketings profitieren? Ich helfe Ihnen, ich berate Sie und konzipiere professionelle Lösungen genau abgestimmt auf Ihr Anliegen.',
@@ -50,10 +51,10 @@ export default function Services() {
                         const Icon = service.icon;
 
                         return (
-                            <Link key={service.id} href={`/services/${service.id}`} className='group flex flex-col h-full'>
+                            <Link key={service.id} href={service.link ?? `/services/${service.id}`} className='group flex flex-col h-full'>
                                 <div className='flex flex-col h-full rounded-lg border border-border/40 bg-card p-6 shadow-sm transition-all duration-200 hover:shadow-md hover:border-primary/20 hover:translate-y-[-4px]'>
-                                    <div className='mb-4 rounded-full bg-primary/10 p-3 w-12 h-12 flex items-center justify-center'>
-                                        <Icon className='h-6 w-6 text-primary' />
+                                    <div className='mb-4 rounded-full bg-secondary p-3 w-12 h-12 flex items-center justify-center'>
+                                        <Icon className='h-6 w-6 text-secondary-foreground' />
                                     </div>
 
                                     <h3 className='text-xl font-bold mb-2 group-hover:text-primary transition-colors'>{service.title}</h3>
@@ -61,7 +62,7 @@ export default function Services() {
                                     <p className='text-muted-foreground flex-grow'>{service.description}</p>
 
                                     <div className='mt-4 text-sm font-medium text-primary opacity-0 group-hover:opacity-100 transition-opacity flex items-center'>
-                                        Mehr erfahren
+                                        {service.link ? 'Jetzt Beratung vereinbaren' : 'Mehr erfahren'}
                                         <svg
                                             xmlns='http://www.w3.org/2000/svg'
                                             width='16'

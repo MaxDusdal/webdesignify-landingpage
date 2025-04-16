@@ -489,8 +489,8 @@ export default function ContactPage() {
             <div className='container px-4 md:px-6 mx-auto max-w-screen-lg'>
                 <div className='max-w-3xl mx-auto'>
                     <HeaderSection
-                        title='Kontaktieren Sie uns'
-                        description='Füllen Sie das Formular aus, und wir melden uns innerhalb von 24 Stunden bei Ihnen.'
+                        title='Jetzt Kontakt aufnehmen'
+                        description='Füllen Sie das Formular aus, und ich melde mich innerhalb von 48 Stunden bei dir.'
                         subtitle='Kontaktformular'
                     />
 
@@ -598,7 +598,7 @@ export default function ContactPage() {
                             </div>
                             <h2 className='text-2xl font-bold mb-2'>Vielen Dank!</h2>
                             <p className='text-muted-foreground mb-6'>
-                                Ihre Anfrage wurde erfolgreich übermittelt. Wir werden uns innerhalb von 72 Stunden bei Ihnen melden.
+                                Ihre Anfrage wurde erfolgreich übermittelt. Ich melde mich innerhalb von 48 Stunden bei dir.
                             </p>
                             <Button onClick={() => router.push('/')}>Zurück zur Startseite</Button>
                         </motion.div>

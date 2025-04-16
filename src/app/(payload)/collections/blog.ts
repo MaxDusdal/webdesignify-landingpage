@@ -67,19 +67,6 @@ export const Blog: CollectionConfig = {
             name: 'readTime',
             type: 'number',
         },
-        {
-            name: 'metaTitle',
-            type: 'text',
-        },
-        {
-            name: 'metaDescription',
-            type: 'text',
-        },
-        {
-            name: 'metaKeywords',
-            type: 'array',
-            fields: [{ name: 'keyword', type: 'text' }],
-        },
     ],
     admin: {
         useAsTitle: 'title',

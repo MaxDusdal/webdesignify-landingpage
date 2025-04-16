@@ -1,11 +1,12 @@
 'use client';
 
 import { ArrowRight, BarChart2, Globe, Search, Star, MessageSquare, Server, TrendingUp, MapPin, MoreHorizontal } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import SocialProof from '@/components/social-proof';
 import Blog from '@/components/blog';
 import Subservices from '@/components/subservices';
 import HeaderSection from '@/components/header-section';
+import Timeline, { TimelineStep } from '@/components/timeline';
+import ServicesCtaSection from '@/components/services-cta-section';
 
 export default function StrategieOptimierung() {
     const subServices = [
@@ -85,60 +86,80 @@ export default function StrategieOptimierung() {
         },
     ];
 
+    const timelineSteps: TimelineStep[] = [
+        {
+            number: 1,
+            title: 'Analyse',
+            description:
+                'Wir analysieren Ihre Zielgruppe, Keywords und den aktuellen Status Ihres Online-Auftritts, um Schwachstellen und Potenziale zu identifizieren.',
+        },
+        {
+            number: 2,
+            title: 'Optimierung',
+            description:
+                'Basierend auf den Erkenntnissen optimieren wir Ihre Website, SEO-Strategien und Marketingmaßnahmen für maximale Performance.',
+        },
+        {
+            number: 3,
+            title: 'Wachstum',
+            description:
+                'Kontinuierliche Überwachung und Anpassung der Strategien, um langfristiges Wachstum zu sichern und mehr Kunden zu gewinnen.',
+        },
+    ];
+
     return (
         <main>
             {/* Hero Section */}
-            <HeaderSection
-                subtitle='STRATEGIEOPTIMIERUNG'
-                title='Ihr Online-Auftritt darf nicht nur gut aussehen.'
-                description='Ich helfe Ihnen, aus Ihrem Online-Auftritt einen geschäftlichen Mehrwert zu ziehen. Dabei optimiere ich, mit Ihnen zusammen, die Ergebnisse, die aus Ihrem Online-Auftritt hervorgehen, damit Sie mehr Sign-ups, Demos oder Verkäufe erzielen.'
-                buttons={[
-                    {
-                        text: 'Kontakt aufnehmen',
-                        icon: ArrowRight,
-                    },
-                    {
-                        text: 'Referenzen ansehen',
-                        variant: 'link',
-                    },
-                ]}
-            />
+            <section className='py-12 md:py-1   6'>
+                <HeaderSection
+                    subtitle='STRATEGIEOPTIMIERUNG'
+                    title='Ihr Online-Auftritt darf nicht nur gut aussehen.'
+                    description='Ich helfe Ihnen, aus Ihrem Online-Auftritt einen geschäftlichen Mehrwert zu ziehen. Dabei optimiere ich, mit Ihnen zusammen, die Ergebnisse, die aus Ihrem Online-Auftritt hervorgehen, damit Sie mehr Sign-ups, Demos oder Verkäufe erzielen.'
+                    buttons={[
+                        {
+                            text: 'Kontakt aufnehmen',
+                            icon: ArrowRight,
+                        },
+                        {
+                            text: 'Referenzen ansehen',
+                            variant: 'link',
+                        },
+                    ]}
+                />
 
-            {/* Subservices Section */}
-            <Subservices services={subServices} />
-
-            {/* Social Proof Section */}
-            <SocialProof />
-
-            <HeaderSection
-                headerType='h2'
-                subtitle='WEBSITE-OPTIMIERUNG'
-                title='Ihre Webseite sollte nicht nur gut aussehen.'
-                description='Ich optimiere Ihre Webseite, um mehr Besucher in Kunden zu verwandeln.'
-            />
-            {/* Website Services Section */}
-            <Subservices services={websiteServices} />
-
-            {/* CTA Section */}
-            <section className='w-full py-12 md:py-24 bg-secondary text-secondary-foreground'>
+                {/* Subservices Section */}
+                <Subservices services={subServices} />
+            </section>
+            {/* Timeline Section */}
+            <section className='py-12 md:py-16 '>
                 <div className='container px-4 md:px-6 mx-auto max-w-7xl'>
-                    <div className='flex flex-col md:flex-row gap-8 md:gap-12 items-center justify-between'>
-                        <div className='space-y-4 md:w-2/3'>
-                            <h2 className='text-3xl font-bold tracking-tighter md:text-4xl'>Bereit, Ihren Online-Auftritt zu 📈?</h2>
-                            <p className='text-xl text-primary-foreground/80'>
-                                Lassen Sie uns gemeinsam eine Strategie entwickeln, die Ihren Geschäftserfolg nachhaltig steigert.
-                            </p>
-                        </div>
-                        <div className='md:w-1/3 flex justify-center md:justify-end'>
-                            <Button size='lg' variant='default' className='group'>
-                                Jetzt Beratungsgespräch vereinbaren
-                                <ArrowRight className='ml-2 h-4 w-4 transition-transform group-hover:translate-x-1' />
-                            </Button>
-                        </div>
-                    </div>
+                    <HeaderSection
+                        headerType='h2'
+                        animate={false}
+                        subtitle='DER PROZESS'
+                        title='So optimieren wir Ihre Strategie in drei einfachen Schritten'
+                        align='left'
+                    />
+                    <Timeline steps={timelineSteps} />
                 </div>
             </section>
+            {/* Social Proof Section */}
+            <SocialProof variant='secondary' showClientLogos={false} />
 
+            <section className='py-12 md:py-16'>
+                <HeaderSection
+                    headerType='h2'
+                    animate={false}
+                    subtitle='WEBSITE-OPTIMIERUNG'
+                    title='Ihre Webseite sollte nicht nur gut aussehen.'
+                    description='Ich optimiere Ihre Webseite, um mehr Besucher in Kunden zu verwandeln.'
+                />
+                {/* Website Services Section */}
+                <Subservices services={websiteServices} animate={false} />
+            </section>
+
+            {/* CTA Section */}
+            <ServicesCtaSection header='Bereit, Ihren Online-Auftritt zu 📈?' description='Lassen Sie uns gemeinsam eine Strategie entwickeln, die Ihren Geschäftserfolg nachhaltig steigert.' buttonText='Jetzt Beratungsgespräch vereinbaren'/>
             {/* Blog Section */}
             <Blog />
         </main>

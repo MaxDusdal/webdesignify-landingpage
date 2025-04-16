@@ -135,3 +135,21 @@ export default async function BlogPost({ params }: { params: { slug: string } })
         </main>
     );
 }
+
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+    const payload = await getPayload({ config: payloadConfig });
+    const post = await payload.find({
+        collection: 'blog',
+        where: { slug: { equals: params.slug } },
+    });
+
+    const postData = post.docs[0];
+
+    return {
+        title: postData.meta?.title || postData.title,
+        description: postData.meta?.description || postData.excerpt,
+        openGraph: {
+            images: [postData.meta?.image?.url || postData.image?.url],
+        },
+    };
+}   
