@@ -16,34 +16,10 @@ import HeaderSection from '@/components/header-section';
 import { z } from 'zod';
 import { useForm, Controller, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { FORM_OPTIONS } from '@/lib/contact-form-schema';
+import { contactFormSchema } from '@/lib/contact-form-schema';
 
-const formSchema = z.object({
-    // Step 1: Personal Information
-    name: z.string().min(1, { message: 'Name ist erforderlich' }),
-    email: z.string().email({ message: 'Gültige E-Mail-Adresse erforderlich' }),
-    phone: z.string().optional(),
-
-    // Step 2: Business Information
-    companyName: z.string().optional(),
-    industry: z.string().optional(),
-    businessSize: z.string().optional(),
-
-    // Step 3: Current Infrastructure
-    hasWebsite: z.string().min(1, { message: 'Bitte auswählen' }),
-    websiteUrl: z.string().optional(),
-    currentMarketing: z.array(z.string()).optional().default([]),
-
-    // Step 4: Project Details
-    projectType: z.array(z.string()).min(1, { message: 'Bitte mindestens eine Option auswählen' }),
-    timeline: z.string().min(1, { message: 'Zeitrahmen ist erforderlich' }),
-    budget: z.string().min(1, { message: 'Budget ist erforderlich' }),
-
-    // Step 5: Additional Information
-    message: z.string().min(1, { message: 'Nachricht ist erforderlich' }),
-    howDidYouHear: z.string().optional(),
-});
-
-type FormData = z.infer<typeof formSchema>;
+type FormData = z.infer<typeof contactFormSchema>;
 
 export default function ContactPage() {
     const router = useRouter();
@@ -52,17 +28,17 @@ export default function ContactPage() {
     const [isSubmitted, setIsSubmitted] = useState(false);
 
     const methods = useForm<FormData>({
-        resolver: zodResolver(formSchema),
+        resolver: zodResolver(contactFormSchema),
         defaultValues: {
             name: '',
             email: '',
             phone: '',
             companyName: '',
-            industry: '',
-            businessSize: '',
-            hasWebsite: '',
+            industry: 'other',
+            businessSize: '1-10',
+            hasWebsite: 'no',
             websiteUrl: '',
-            currentMarketing: [],
+            currentMarketing: ['none'],
             projectType: [],
             timeline: '',
             budget: '',
@@ -71,14 +47,24 @@ export default function ContactPage() {
         },
     });
 
-    const { control, handleSubmit: hookFormSubmit, trigger, formState: { errors }, watch, setValue } = methods;
+    const {
+        control,
+        handleSubmit: hookFormSubmit,
+        trigger,
+        formState: { errors },
+        watch,
+        setValue,
+    } = methods;
 
     const hasWebsite = watch('hasWebsite');
 
     const handleCheckboxChange = (field: 'currentMarketing' | 'projectType', value: string) => {
         const currentValues = watch(field);
         if (currentValues.includes(value)) {
-            setValue(field, currentValues.filter(item => item !== value));
+            setValue(
+                field,
+                currentValues.filter((item) => item !== value)
+            );
         } else {
             setValue(field, [...currentValues, value]);
         }
@@ -116,7 +102,7 @@ export default function ContactPage() {
         switch (step) {
             case 0:
                 return ['name', 'email'];
-            case 1: 
+            case 1:
                 return [];
             case 2:
                 return ['hasWebsite'];
@@ -132,13 +118,29 @@ export default function ContactPage() {
     const onSubmit = async (data: FormData) => {
         setIsSubmitting(true);
 
-        // TODO: Add Form Submission
-        await new Promise((resolve) => setTimeout(resolve, 1500));
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
 
-        console.log('Form submitted:', data);
-        
-        setIsSubmitting(false);
-        setIsSubmitted(true);
+            const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(result.message || 'Failed to submit form');
+            }
+
+            console.log('Form submitted successfully:', result);
+            setIsSubmitted(true);
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            // You could add error state handling here
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     const steps = [
@@ -148,9 +150,11 @@ export default function ContactPage() {
             fields: (
                 <div className='space-y-6'>
                     <div>
-                        <Label htmlFor='name' className="mb-2 block">Name *</Label>
+                        <Label htmlFor='name' className='mb-2 block'>
+                            Name *
+                        </Label>
                         <Controller
-                            name="name"
+                            name='name'
                             control={control}
                             render={({ field }) => (
                                 <Input
@@ -162,12 +166,14 @@ export default function ContactPage() {
                                 />
                             )}
                         />
-                        {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
+                        {errors.name && <p className='text-red-500 text-sm mt-1'>{errors.name.message}</p>}
                     </div>
                     <div>
-                        <Label htmlFor='email' className="mb-2 block">E-Mail *</Label>
+                        <Label htmlFor='email' className='mb-2 block'>
+                            E-Mail *
+                        </Label>
                         <Controller
-                            name="email"
+                            name='email'
                             control={control}
                             render={({ field }) => (
                                 <Input
@@ -180,21 +186,16 @@ export default function ContactPage() {
                                 />
                             )}
                         />
-                        {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
+                        {errors.email && <p className='text-red-500 text-sm mt-1'>{errors.email.message}</p>}
                     </div>
                     <div>
-                        <Label htmlFor='phone' className="mb-2 block">Telefonnummer</Label>
+                        <Label htmlFor='phone' className='mb-2 block'>
+                            Telefonnummer
+                        </Label>
                         <Controller
-                            name="phone"
+                            name='phone'
                             control={control}
-                            render={({ field }) => (
-                                <Input
-                                    id='phone'
-                                    placeholder='+49 123 456789'
-                                    {...field}
-                                    onKeyDown={handleKeyDown}
-                                />
-                            )}
+                            render={({ field }) => <Input id='phone' placeholder='+49 123 456789' {...field} onKeyDown={handleKeyDown} />}
                         />
                     </div>
                 </div>
@@ -206,24 +207,23 @@ export default function ContactPage() {
             fields: (
                 <div className='space-y-6'>
                     <div>
-                        <Label htmlFor='companyName' className="mb-2 block">Unternehmensname</Label>
+                        <Label htmlFor='companyName' className='mb-2 block'>
+                            Unternehmensname
+                        </Label>
                         <Controller
-                            name="companyName"
+                            name='companyName'
                             control={control}
                             render={({ field }) => (
-                                <Input
-                                    id='companyName'
-                                    placeholder='Name Ihres Unternehmens'
-                                    {...field}
-                                    onKeyDown={handleKeyDown}
-                                />
+                                <Input id='companyName' placeholder='Name Ihres Unternehmens' {...field} onKeyDown={handleKeyDown} />
                             )}
                         />
                     </div>
                     <div>
-                        <Label htmlFor='industry' className="mb-2 block">Branche</Label>
+                        <Label htmlFor='industry' className='mb-2 block'>
+                            Branche
+                        </Label>
                         <Controller
-                            name="industry"
+                            name='industry'
                             control={control}
                             render={({ field }) => (
                                 <Select onValueChange={field.onChange} value={field.value}>
@@ -231,46 +231,31 @@ export default function ContactPage() {
                                         <SelectValue placeholder='Wählen Sie Ihre Branche' />
                                     </SelectTrigger>
                                     <SelectContent>
-                                        <SelectItem value='technology'>Technologie</SelectItem>
-                                        <SelectItem value='healthcare'>Gesundheitswesen</SelectItem>
-                                        <SelectItem value='finance'>Finanzen</SelectItem>
-                                        <SelectItem value='education'>Bildung</SelectItem>
-                                        <SelectItem value='retail'>Einzelhandel</SelectItem>
-                                        <SelectItem value='manufacturing'>Fertigung</SelectItem>
-                                        <SelectItem value='services'>Dienstleistungen</SelectItem>
-                                        <SelectItem value='other'>Andere</SelectItem>
+                                        {FORM_OPTIONS.industries.map((option) => (
+                                            <SelectItem key={option.value} value={option.value}>
+                                                {option.label}
+                                            </SelectItem>
+                                        ))}
                                     </SelectContent>
                                 </Select>
                             )}
                         />
                     </div>
                     <div>
-                        <Label htmlFor='businessSize' className="mb-2 block">Unternehmensgröße</Label>
+                        <Label htmlFor='businessSize' className='mb-2 block'>
+                            Unternehmensgröße
+                        </Label>
                         <Controller
-                            name="businessSize"
+                            name='businessSize'
                             control={control}
                             render={({ field }) => (
-                                <RadioGroup
-                                    onValueChange={field.onChange}
-                                    value={field.value}
-                                    className='flex flex-col space-y-1'
-                                >
-                                    <div className='flex items-center space-x-2'>
-                                        <RadioGroupItem value='1-10' id='size-1' />
-                                        <Label htmlFor='size-1'>1-10 Mitarbeiter</Label>
-                                    </div>
-                                    <div className='flex items-center space-x-2'>
-                                        <RadioGroupItem value='11-50' id='size-2' />
-                                        <Label htmlFor='size-2'>11-50 Mitarbeiter</Label>
-                                    </div>
-                                    <div className='flex items-center space-x-2'>
-                                        <RadioGroupItem value='51-200' id='size-3' />
-                                        <Label htmlFor='size-3'>51-200 Mitarbeiter</Label>
-                                    </div>
-                                    <div className='flex items-center space-x-2'>
-                                        <RadioGroupItem value='201+' id='size-4' />
-                                        <Label htmlFor='size-4'>201+ Mitarbeiter</Label>
-                                    </div>
+                                <RadioGroup onValueChange={field.onChange} value={field.value} className='flex flex-col space-y-1'>
+                                    {FORM_OPTIONS.businessSizes.map((option) => (
+                                        <div key={option.value} className='flex items-center space-x-2'>
+                                            <RadioGroupItem value={option.value} id={`size-${option.value}`} />
+                                            <Label htmlFor={`size-${option.value}`}>{option.label}</Label>
+                                        </div>
+                                    ))}
                                 </RadioGroup>
                             )}
                         />
@@ -284,43 +269,34 @@ export default function ContactPage() {
             fields: (
                 <div className='space-y-6'>
                     <div>
-                        <Label className="mb-2 block">Haben Sie bereits eine Website? *</Label>
+                        <Label className='mb-2 block'>Haben Sie bereits eine Website? *</Label>
                         <Controller
-                            name="hasWebsite"
+                            name='hasWebsite'
                             control={control}
                             render={({ field }) => (
-                                <RadioGroup
-                                    onValueChange={field.onChange}
-                                    value={field.value}
-                                    className='flex flex-col space-y-1 mt-2'
-                                >
-                                    <div className='flex items-center space-x-2'>
-                                        <RadioGroupItem value='yes' id='website-yes' />
-                                        <Label htmlFor='website-yes'>Ja</Label>
-                                    </div>
-                                    <div className='flex items-center space-x-2'>
-                                        <RadioGroupItem value='no' id='website-no' />
-                                        <Label htmlFor='website-no'>Nein</Label>
-                                    </div>
+                                <RadioGroup onValueChange={field.onChange} value={field.value} className='flex flex-col space-y-1 mt-2'>
+                                    {FORM_OPTIONS.hasWebsite.map((option) => (
+                                        <div key={option.value} className='flex items-center space-x-2'>
+                                            <RadioGroupItem value={option.value} id={`website-${option.value}`} />
+                                            <Label htmlFor={`website-${option.value}`}>{option.label}</Label>
+                                        </div>
+                                    ))}
                                 </RadioGroup>
                             )}
                         />
-                        {errors.hasWebsite && <p className="text-red-500 text-sm mt-1">{errors.hasWebsite.message}</p>}
+                        {errors.hasWebsite && <p className='text-red-500 text-sm mt-1'>{errors.hasWebsite.message}</p>}
                     </div>
 
                     {hasWebsite === 'yes' && (
                         <div>
-                            <Label htmlFor='websiteUrl' className="mb-2 block">Website URL</Label>
+                            <Label htmlFor='websiteUrl' className='mb-2 block'>
+                                Website URL
+                            </Label>
                             <Controller
-                                name="websiteUrl"
+                                name='websiteUrl'
                                 control={control}
                                 render={({ field }) => (
-                                    <Input
-                                        id='websiteUrl'
-                                        placeholder='https://www.ihre-website.de'
-                                        {...field}
-                                        onKeyDown={handleKeyDown}
-                                    />
+                                    <Input id='websiteUrl' placeholder='https://www.ihre-website.de' {...field} onKeyDown={handleKeyDown} />
                                 )}
                             />
                         </div>
@@ -329,23 +305,16 @@ export default function ContactPage() {
                     <div>
                         <Label className='mb-2 block'>Welche Marketing-Tools nutzen Sie bereits?</Label>
                         <div className='space-y-2'>
-                            {[
-                                { id: 'analytics', label: 'Google Analytics' },
-                                { id: 'ads', label: 'Google Ads' },
-                                { id: 'social', label: 'Social Media Marketing' },
-                                { id: 'email', label: 'E-Mail Marketing' },
-                                { id: 'seo', label: 'SEO' },
-                                { id: 'none', label: 'Keine' },
-                            ].map((item) => (
-                                <div key={item.id} className='flex items-center'>
+                            {FORM_OPTIONS.marketingTools.map((item) => (
+                                <div key={item.value} className='flex items-center'>
                                     <input
                                         type='checkbox'
-                                        id={item.id}
+                                        id={item.value}
                                         className='h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary'
-                                        checked={watch('currentMarketing').includes(item.id)}
-                                        onChange={() => handleCheckboxChange('currentMarketing', item.id)}
+                                        checked={watch('currentMarketing').includes(item.value)}
+                                        onChange={() => handleCheckboxChange('currentMarketing', item.value)}
                                     />
-                                    <Label htmlFor={item.id} className='ml-2'>
+                                    <Label htmlFor={item.value} className='ml-2'>
                                         {item.label}
                                     </Label>
                                 </div>
@@ -363,35 +332,30 @@ export default function ContactPage() {
                     <div>
                         <Label className='mb-2 block'>An welchen Dienstleistungen sind Sie interessiert? *</Label>
                         <div className='space-y-2'>
-                            {[
-                                { id: 'web-design', label: 'Webdesign' },
-                                { id: 'web-development', label: 'Webentwicklung' },
-                                { id: 'seo-optimization', label: 'SEO-Optimierung' },
-                                { id: 'online-marketing', label: 'Online-Marketing' },
-                                { id: 'content-creation', label: 'Content-Erstellung' },
-                                { id: 'consulting', label: 'Beratung' },
-                            ].map((item) => (
-                                <div key={item.id} className='flex items-center'>
+                            {FORM_OPTIONS.projectTypes.map((item) => (
+                                <div key={item.value} className='flex items-center'>
                                     <input
                                         type='checkbox'
-                                        id={item.id}
+                                        id={item.value}
                                         className='h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary'
-                                        checked={watch('projectType').includes(item.id)}
-                                        onChange={() => handleCheckboxChange('projectType', item.id)}
+                                        checked={watch('projectType').includes(item.value)}
+                                        onChange={() => handleCheckboxChange('projectType', item.value)}
                                     />
-                                    <Label htmlFor={item.id} className='ml-2'>
+                                    <Label htmlFor={item.value} className='ml-2'>
                                         {item.label}
                                     </Label>
                                 </div>
                             ))}
                         </div>
-                        {errors.projectType && <p className="text-red-500 text-sm mt-1">{errors.projectType.message}</p>}
+                        {errors.projectType && <p className='text-red-500 text-sm mt-1'>{errors.projectType.message}</p>}
                     </div>
 
                     <div>
-                        <Label htmlFor='timeline' className="mb-2 block">Zeitrahmen *</Label>
+                        <Label htmlFor='timeline' className='mb-2 block'>
+                            Zeitrahmen *
+                        </Label>
                         <Controller
-                            name="timeline"
+                            name='timeline'
                             control={control}
                             render={({ field }) => (
                                 <Select onValueChange={field.onChange} value={field.value}>
@@ -399,22 +363,24 @@ export default function ContactPage() {
                                         <SelectValue placeholder='Wann möchten Sie starten?' />
                                     </SelectTrigger>
                                     <SelectContent>
-                                        <SelectItem value='immediately'>Sofort</SelectItem>
-                                        <SelectItem value='1-month'>Innerhalb eines Monats</SelectItem>
-                                        <SelectItem value='3-months'>In 1-3 Monaten</SelectItem>
-                                        <SelectItem value='6-months'>In 3-6 Monaten</SelectItem>
-                                        <SelectItem value='exploring'>Ich erkunde nur Optionen</SelectItem>
+                                        {FORM_OPTIONS.timelines.map((option) => (
+                                            <SelectItem key={option.value} value={option.value}>
+                                                {option.label}
+                                            </SelectItem>
+                                        ))}
                                     </SelectContent>
                                 </Select>
                             )}
                         />
-                        {errors.timeline && <p className="text-red-500 text-sm mt-1">{errors.timeline.message}</p>}
+                        {errors.timeline && <p className='text-red-500 text-sm mt-1'>{errors.timeline.message}</p>}
                     </div>
 
                     <div>
-                        <Label htmlFor='budget' className="mb-2 block">Budget *</Label>
+                        <Label htmlFor='budget' className='mb-2 block'>
+                            Budget *
+                        </Label>
                         <Controller
-                            name="budget"
+                            name='budget'
                             control={control}
                             render={({ field }) => (
                                 <Select onValueChange={field.onChange} value={field.value}>
@@ -422,17 +388,16 @@ export default function ContactPage() {
                                         <SelectValue placeholder='Ihr ungefähres Budget' />
                                     </SelectTrigger>
                                     <SelectContent>
-                                        <SelectItem value='under-2k'>Unter 2.000 €</SelectItem>
-                                        <SelectItem value='2k-5k'>2.000 € - 5.000 €</SelectItem>
-                                        <SelectItem value='5k-10k'>5.000 € - 10.000 €</SelectItem>
-                                        <SelectItem value='10k-20k'>10.000 € - 20.000 €</SelectItem>
-                                        <SelectItem value='over-20k'>Über 20.000 €</SelectItem>
-                                        <SelectItem value='not-sure'>Noch nicht sicher</SelectItem>
+                                        {FORM_OPTIONS.budgets.map((option) => (
+                                            <SelectItem key={option.value} value={option.value}>
+                                                {option.label}
+                                            </SelectItem>
+                                        ))}
                                     </SelectContent>
                                 </Select>
                             )}
                         />
-                        {errors.budget && <p className="text-red-500 text-sm mt-1">{errors.budget.message}</p>}
+                        {errors.budget && <p className='text-red-500 text-sm mt-1'>{errors.budget.message}</p>}
                     </div>
                 </div>
             ),
@@ -443,9 +408,11 @@ export default function ContactPage() {
             fields: (
                 <div className='space-y-6'>
                     <div>
-                        <Label htmlFor='message' className="mb-2 block">Ihre Nachricht *</Label>
+                        <Label htmlFor='message' className='mb-2 block'>
+                            Ihre Nachricht *
+                        </Label>
                         <Controller
-                            name="message"
+                            name='message'
                             control={control}
                             render={({ field }) => (
                                 <Textarea
@@ -456,12 +423,14 @@ export default function ContactPage() {
                                 />
                             )}
                         />
-                        {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message.message}</p>}
+                        {errors.message && <p className='text-red-500 text-sm mt-1'>{errors.message.message}</p>}
                     </div>
                     <div>
-                        <Label htmlFor='howDidYouHear' className="mb-2 block">Wie haben Sie von uns erfahren?</Label>
+                        <Label htmlFor='howDidYouHear' className='mb-2 block'>
+                            Wie haben Sie von uns erfahren?
+                        </Label>
                         <Controller
-                            name="howDidYouHear"
+                            name='howDidYouHear'
                             control={control}
                             render={({ field }) => (
                                 <Select onValueChange={field.onChange} value={field.value}>
@@ -469,11 +438,11 @@ export default function ContactPage() {
                                         <SelectValue placeholder='Bitte auswählen' />
                                     </SelectTrigger>
                                     <SelectContent>
-                                        <SelectItem value='search'>Suchmaschine (Google, Bing, etc.)</SelectItem>
-                                        <SelectItem value='social'>Social Media</SelectItem>
-                                        <SelectItem value='referral'>Empfehlung</SelectItem>
-                                        <SelectItem value='blog'>Blog oder Artikel</SelectItem>
-                                        <SelectItem value='other'>Andere</SelectItem>
+                                        {FORM_OPTIONS.referralSources.map((option) => (
+                                            <SelectItem key={option.value} value={option.value}>
+                                                {option.label}
+                                            </SelectItem>
+                                        ))}
                                     </SelectContent>
                                 </Select>
                             )}
@@ -496,7 +465,6 @@ export default function ContactPage() {
 
                     {!isSubmitted ? (
                         <div className='bg-card border border-border/40 rounded-lg shadow-sm overflow-hidden'>
-                            {/* Progress Bar */}
                             <div className='w-full bg-muted h-1'>
                                 <div
                                     className='bg-secondary h-1 transition-all duration-300'
@@ -504,7 +472,6 @@ export default function ContactPage() {
                                 ></div>
                             </div>
 
-                            {/* Step Indicator */}
                             <div className='flex items-center justify-between px-6 py-4 bg-muted/50'>
                                 <div className='flex items-center'>
                                     <div className='bg-secondary text-secondary-foreground w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium'>
@@ -520,7 +487,6 @@ export default function ContactPage() {
                                 </div>
                             </div>
 
-                            {/* Form Content */}
                             <FormProvider {...methods}>
                                 <form onSubmit={hookFormSubmit(onSubmit)} onKeyDown={handleKeyDown}>
                                     <div className='p-6'>

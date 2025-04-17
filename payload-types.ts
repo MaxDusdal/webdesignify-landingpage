@@ -71,6 +71,7 @@ export interface Config {
     blog: Blog;
     author: Author;
     'case-studies': CaseStudy;
+    'contact-forms': ContactForm;
     users: User;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -82,6 +83,7 @@ export interface Config {
     blog: BlogSelect<false> | BlogSelect<true>;
     author: AuthorSelect<false> | AuthorSelect<true>;
     'case-studies': CaseStudiesSelect<false> | CaseStudiesSelect<true>;
+    'contact-forms': ContactFormsSelect<false> | ContactFormsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -411,6 +413,51 @@ export interface CaseStudy {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-forms".
+ */
+export interface ContactForm {
+  id: number;
+  name: string;
+  email: string;
+  phone?: string | null;
+  companyName?: string | null;
+  industry?:
+    | (
+        | 'restaurants'
+        | 'medical'
+        | 'legal'
+        | 'trades'
+        | 'realestate'
+        | 'consulting'
+        | 'fitness'
+        | 'education'
+        | 'events'
+        | 'other'
+      )
+    | null;
+  businessSize?: ('1-10' | '11-50' | '51-200' | '201+') | null;
+  hasWebsite: 'yes' | 'no';
+  websiteUrl?: string | null;
+  currentMarketing?: ('analytics' | 'ads' | 'social' | 'email' | 'seo' | 'none')[] | null;
+  projectType: (
+    | 'web-design'
+    | 'web-development'
+    | 'seo-optimization'
+    | 'online-marketing'
+    | 'content-creation'
+    | 'consulting'
+  )[];
+  timeline: 'immediately' | '1-month' | '3-months' | '6-months' | 'exploring';
+  budget: 'under-2k' | '2k-5k' | '5k-10k' | '10k-20k' | 'over-20k' | 'not-sure';
+  message?: string | null;
+  howDidYouHear?: ('search' | 'social' | 'referral' | 'blog' | 'other') | null;
+  status: 'new' | 'in-progress' | 'contacted' | 'closed';
+  notes?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -431,6 +478,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'case-studies';
         value: number | CaseStudy;
+      } | null)
+    | ({
+        relationTo: 'contact-forms';
+        value: number | ContactForm;
       } | null)
     | ({
         relationTo: 'users';
@@ -704,6 +755,30 @@ export interface CaseStudiesSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-forms_select".
+ */
+export interface ContactFormsSelect<T extends boolean = true> {
+  name?: T;
+  email?: T;
+  phone?: T;
+  companyName?: T;
+  industry?: T;
+  businessSize?: T;
+  hasWebsite?: T;
+  websiteUrl?: T;
+  currentMarketing?: T;
+  projectType?: T;
+  timeline?: T;
+  budget?: T;
+  message?: T;
+  howDidYouHear?: T;
+  status?: T;
+  notes?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

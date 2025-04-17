@@ -37,7 +37,7 @@ export default function Blog() {
                 setIsLoading(true);
                 const response = await fetch('/api/blog?limit=2&sort=-date');
                 const data = await response.json();
-                
+
                 if (data.docs && Array.isArray(data.docs)) {
                     setPosts(data.docs);
                 }
@@ -53,7 +53,7 @@ export default function Blog() {
 
     useEffect(() => {
         if (!blogRef.current) return;
-        
+
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
@@ -64,9 +64,9 @@ export default function Blog() {
             },
             { threshold: 0.1 }
         );
-        
+
         observer.observe(blogRef.current);
-        
+
         return () => {
             if (blogRef.current) {
                 observer.unobserve(blogRef.current);
@@ -85,7 +85,7 @@ export default function Blog() {
                         </p>
                     </div>
                     <Button variant='outline' className='group' asChild>
-                        <Link href="/blog">
+                        <Link href='/blog'>
                             Alle Beiträge
                             <ArrowRight className='ml-2 h-4 w-4 transition-transform group-hover:translate-x-1' />
                         </Link>
@@ -93,80 +93,73 @@ export default function Blog() {
                 </div>
 
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12'>
-                    {isLoading ? (
-                        // Loading skeleton
-                        Array.from({ length: 2 }).map((_, index) => (
-                            <div 
-                                key={`skeleton-${index}`} 
-                                className='animate-pulse rounded-lg overflow-hidden border border-border/40 bg-card'
-                            >
-                                <div className='h-[200px] w-full bg-muted'></div>
-                                <div className='p-6 space-y-4'>
-                                    <div className='h-6 bg-muted rounded w-3/4'></div>
-                                    <div className='h-4 bg-muted rounded w-full'></div>
-                                    <div className='h-4 bg-muted rounded w-full'></div>
-                                    <div className='h-4 bg-muted rounded w-2/3'></div>
-                                    <div className='pt-4 border-t border-border/40 flex gap-3'>
-                                        <div className='h-4 bg-muted rounded w-1/4'></div>
-                                        <div className='h-4 bg-muted rounded w-1/4'></div>
-                                        <div className='h-4 bg-muted rounded w-1/4'></div>
-                                    </div>
-                                </div>
-                            </div>
-                        ))
-                    ) : (
-                        posts.map((post, index) => (
-                            <Link
-                                key={post.id}
-                                href={`/blog/${post.slug}`}
-                                className={`group relative flex flex-col overflow-hidden rounded-lg border border-border/40 bg-card shadow-sm transition-all duration-500 hover:shadow-md hover:border-primary/20 hover:translate-y-[-4px] ${
-                                    isVisible ? `animate-fade-in-${index + 1}` : 'opacity-0'
-                                }`}
-                            >
-                                <div className='relative h-[200px] w-full overflow-hidden'>
-                                    <Image
-                                        src={post.image?.url || '/placeholder.svg'}
-                                        alt={post.title}
-                                        fill
-                                        className='object-cover transition-transform duration-500 group-hover:scale-105'
-                                    />
-                                    <div className='absolute top-4 left-4'>
-                                        <Badge variant='secondary' className='bg-primary text-primary-foreground'>
-                                            {post.category}
-                                        </Badge>
-                                    </div>
-                                </div>
+                    {isLoading
+                        ? // Loading skeleton
+                          Array.from({ length: 2 }).map((_, index) => (
+                              <div key={`skeleton-${index}`} className='animate-pulse rounded-lg overflow-hidden border border-border/40 bg-card'>
+                                  <div className='h-[200px] w-full bg-muted'></div>
+                                  <div className='p-6 space-y-4'>
+                                      <div className='h-6 bg-muted rounded w-3/4'></div>
+                                      <div className='h-4 bg-muted rounded w-full'></div>
+                                      <div className='h-4 bg-muted rounded w-full'></div>
+                                      <div className='h-4 bg-muted rounded w-2/3'></div>
+                                      <div className='pt-4 border-t border-border/40 flex gap-3'>
+                                          <div className='h-4 bg-muted rounded w-1/4'></div>
+                                          <div className='h-4 bg-muted rounded w-1/4'></div>
+                                          <div className='h-4 bg-muted rounded w-1/4'></div>
+                                      </div>
+                                  </div>
+                              </div>
+                          ))
+                        : posts.map((post, index) => (
+                              <Link
+                                  key={post.id}
+                                  href={`/blog/${post.slug}`}
+                                  className={`group relative flex flex-col overflow-hidden rounded-lg border border-border/40 bg-card shadow-sm transition-all duration-500 hover:shadow-md  hover:translate-y-[-4px] ${
+                                      isVisible ? `animate-fade-in-${index + 1}` : 'opacity-0'
+                                  }`}
+                              >
+                                  <div className='relative h-[200px] w-full overflow-hidden'>
+                                      <Image
+                                          src={post.image?.url || '/placeholder.svg'}
+                                          alt={post.title}
+                                          fill
+                                          className='object-cover transition-transform duration-500 group-hover:scale-105'
+                                      />
+                                      <div className='absolute top-4 left-4'>
+                                          <Badge variant='secondary' className='bg-primary text-primary-foreground'>
+                                              {post.category}
+                                          </Badge>
+                                      </div>
+                                  </div>
 
-                                <div className='flex flex-col flex-grow p-6'>
-                                    <h3 className='text-xl font-bold mb-2 group-hover:text-primary transition-colors'>{post.title}</h3>
-                                    <p className='text-muted-foreground mb-4 flex-grow'>{post.excerpt}</p>
+                                  <div className='flex flex-col flex-grow p-6'>
+                                      <h3 className='text-xl font-bold mb-2 group-hover:text-secondary transition-colors'>{post.title}</h3>
+                                      <p className='text-muted-foreground mb-4 flex-grow'>{post.excerpt}</p>
 
-                                    <div className='flex items-center text-sm text-muted-foreground mt-auto pt-4 border-t border-border/40'>
-                                        <div className='flex items-center mr-4'>
-                                            <User className='h-4 w-4 mr-1' />
-                                            {post.author?.name}
-                                        </div>
-                                        <div className='flex items-center mr-4'>
-                                            <Calendar className='h-4 w-4 mr-1' />
-                                            {new Date(post.date).toLocaleDateString('de-DE', { 
-                                                day: '2-digit', 
-                                                month: '2-digit', 
-                                                year: 'numeric' 
-                                            })}
-                                        </div>
-                                        {post.readTime && (
-                                            <div className='flex items-center'>
-                                                <Clock className='h-4 w-4 mr-1' />
-                                                {post.readTime} min Lesezeit
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
-
-                                <div className='absolute bottom-0 left-0 h-1 w-0 bg-primary transition-all duration-300 group-hover:w-full'></div>
-                            </Link>
-                        ))
-                    )}
+                                      <div className='flex items-center text-sm text-muted-foreground mt-auto pt-4 border-t border-border/40'>
+                                          <div className='flex items-center mr-4'>
+                                              <User className='h-4 w-4 mr-1' />
+                                              {post.author?.name}
+                                          </div>
+                                          <div className='flex items-center mr-4'>
+                                              <Calendar className='h-4 w-4 mr-1' />
+                                              {new Date(post.date).toLocaleDateString('de-DE', {
+                                                  day: '2-digit',
+                                                  month: '2-digit',
+                                                  year: 'numeric',
+                                              })}
+                                          </div>
+                                          {post.readTime && (
+                                              <div className='flex items-center'>
+                                                  <Clock className='h-4 w-4 mr-1' />
+                                                  {post.readTime} min Lesezeit
+                                              </div>
+                                          )}
+                                      </div>
+                                  </div>
+                              </Link>
+                          ))}
                 </div>
             </div>
 
@@ -181,7 +174,7 @@ export default function Blog() {
                         transform: translateX(0) translateY(0);
                     }
                 }
-                
+
                 @keyframes fadeInRight {
                     from {
                         opacity: 0;
@@ -192,11 +185,11 @@ export default function Blog() {
                         transform: translateX(0) translateY(0);
                     }
                 }
-                
+
                 .animate-fade-in-1 {
                     animation: fadeInLeft 0.6s ease-out forwards;
                 }
-                
+
                 .animate-fade-in-2 {
                     animation: fadeInRight 0.6s ease-out 0.2s forwards;
                 }
