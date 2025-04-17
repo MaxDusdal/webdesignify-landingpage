@@ -5,7 +5,7 @@
     "scripts": {
         "prebuild": "payload generate:types && payload migrate:create --yes && payload migrate:run",
         "dev": "next dev --turbopack",
-        "build": "payload generate:types && next build",
+        "build": "cross-env NODE_OPTIONS=--no-deprecation next build",
         "start": "next start",
         "lint": "next lint"
     },
@@ -39,6 +39,7 @@
         "@tanstack/react-query": "^5.70.0",
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
+        "cross-env": "^7.0.3",
         "embla-carousel-react": "^8.5.2",
         "framer-motion": "^12.6.3",
         "graphql": "^16.10.0",
