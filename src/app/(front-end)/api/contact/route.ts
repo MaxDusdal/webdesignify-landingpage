@@ -4,7 +4,7 @@ import { getPayload } from 'payload';
 import { z } from 'zod';
 
 import { contactFormSchema } from '@/lib/contact-form-schema';
-import { ContactForm } from '../../../../payload-types';
+import { ContactForm } from '../../../../../payload-types';
 
 export async function POST(request: NextRequest) {
     try {

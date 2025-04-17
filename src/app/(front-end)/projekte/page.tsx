@@ -6,7 +6,7 @@ export const metadata: Metadata = {
     description: 'Entdecken Sie meine bisherigen Projekte und Leistungen',
 };
 
-export default async function Projects() {
+export default async function ProjectsPage() {
     return (
         <main className='py-8 md:py-12'>
             <Projects />
