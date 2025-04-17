@@ -1,6 +1,7 @@
 {
     "name": "webdesignify-landingpage",
     "version": "0.1.0",
+    "type": "module",
     "private": true,
     "scripts": {
         "prebuild": "payload generate:types && payload migrate:create --yes && payload migrate:run",
