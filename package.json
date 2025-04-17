@@ -4,7 +4,7 @@
     "type": "module",
     "private": true,
     "scripts": {
-        "prebuild": "payload generate:types && payload migrate:create --yes && payload migrate:run",
+        "prebuild": "payload generate:types",
         "dev": "next dev --turbopack",
         "build": "cross-env NODE_OPTIONS=--no-deprecation next build",
         "start": "next start",
