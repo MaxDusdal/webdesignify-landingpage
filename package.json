@@ -5,7 +5,7 @@
     "scripts": {
         "prebuild": "payload generate:types && payload migrate:create --yes && payload migrate:run",
         "dev": "next dev --turbopack",
-        "build": "payload generate:types && payload migrate:create --yes && payload migrate:run && next build",
+        "build": "payload generate:types && next build",
         "start": "next start",
         "lint": "next lint"
     },
