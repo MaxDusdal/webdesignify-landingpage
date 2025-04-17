@@ -72,6 +72,7 @@ export interface Config {
     author: Author;
     'case-studies': CaseStudy;
     'contact-forms': ContactForm;
+    projekte: Projekte;
     users: User;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -84,6 +85,7 @@ export interface Config {
     author: AuthorSelect<false> | AuthorSelect<true>;
     'case-studies': CaseStudiesSelect<false> | CaseStudiesSelect<true>;
     'contact-forms': ContactFormsSelect<false> | ContactFormsSelect<true>;
+    projekte: ProjekteSelect<false> | ProjekteSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -458,6 +460,33 @@ export interface ContactForm {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "projekte".
+ */
+export interface Projekte {
+  /**
+   * Unique identifier used in the URL (e.g., "restaurant-bergblick")
+   */
+  id: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  image: number | Media;
+  tags?:
+    | {
+        tag: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Select the case study this project should redirect to
+   */
+  caseStudy?: (number | null) | CaseStudy;
+  url: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -482,6 +511,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'contact-forms';
         value: number | ContactForm;
+      } | null)
+    | ({
+        relationTo: 'projekte';
+        value: string | Projekte;
       } | null)
     | ({
         relationTo: 'users';
@@ -777,6 +810,27 @@ export interface ContactFormsSelect<T extends boolean = true> {
   howDidYouHear?: T;
   status?: T;
   notes?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "projekte_select".
+ */
+export interface ProjekteSelect<T extends boolean = true> {
+  id?: T;
+  title?: T;
+  subtitle?: T;
+  description?: T;
+  image?: T;
+  tags?:
+    | T
+    | {
+        tag?: T;
+        id?: T;
+      };
+  caseStudy?: T;
+  url?: T;
   updatedAt?: T;
   createdAt?: T;
 }

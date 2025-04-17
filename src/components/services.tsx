@@ -9,21 +9,21 @@ export default function Services() {
             title: 'Strategie Optimierung',
             description:
                 'Sie haben bereits einen Online-Auftritt, aber nutzen das gesamte Potential der digitalen Vermarktung nicht aus? Ich analysiere und optimiere Ihren Online-Auftritt für das bestmögliche Ergebnis.',
-            icon: TrendingUp,
+            iconName: 'TrendingUp',
         },
         {
             id: 'webdesign',
             title: 'Webseite',
             description:
                 'Ich konzipiere, designe und programmiere Ihre Webseite aus einer Hand und sorge dafür, dass ihre Webseite elegant, erfolgreich und nutzerfreundlich ist.',
-            icon: Globe,
+            iconName: 'Globe',
         },
         {
             id: 'it-loesungen',
             title: 'IT-Lösungen',
             description:
                 'Sie benötigen IT-Lösungen für Ihr Unternehmen, wie z. B. Online-Buchungs-Systeme, E-Mail-Server oder auch Softwarelösungen. Ich berate Sie und konzipiere eine Lösung für Sie.',
-            icon: Server,
+            iconName: 'Server',
         },
         {
             id: 'beratung',
@@ -31,7 +31,7 @@ export default function Services() {
             title: 'Beratung',
             description:
                 'Sie möchten von der Reichweite des Online-Marketings profitieren? Ich helfe Ihnen, ich berate Sie und konzipiere professionelle Lösungen genau abgestimmt auf Ihr Anliegen.',
-            icon: MessageCircle,
+            iconName: 'MessageCircle',
         },
     ];
 
@@ -42,13 +42,14 @@ export default function Services() {
 
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8'>
                     {services.map((service) => {
-                        const Icon = service.icon;
+                        // Get the icon component directly from lucide imports
+                        const Icon = getIconComponent(service.iconName);
 
                         return (
                             <Link key={service.id} href={service.link ?? `/services/${service.id}`} className='group flex flex-col h-full'>
                                 <div className='flex flex-col h-full rounded-lg border border-border/40 bg-card p-6 shadow-sm transition-all duration-200 hover:shadow-md '>
                                     <div className='mb-4 rounded-full bg-secondary p-3 w-12 h-12 flex items-center justify-center'>
-                                        <Icon className='h-6 w-6 text-secondary-foreground' />
+                                        {Icon && <Icon className='h-6 w-6 text-secondary-foreground' />}
                                     </div>
 
                                     <h3 className='text-xl font-bold mb-2 group-hover:text-secondary transition-colors'>{service.title}</h3>
@@ -68,4 +69,20 @@ export default function Services() {
             </div>
         </section>
     );
+}
+
+// Helper function to get icon component by name
+function getIconComponent(name: string) {
+    switch (name) {
+        case 'TrendingUp':
+            return TrendingUp;
+        case 'Globe':
+            return Globe;
+        case 'Server':
+            return Server;
+        case 'MessageCircle':
+            return MessageCircle;
+        default:
+            return null;
+    }
 }

@@ -5,8 +5,6 @@
 import animationDataDesktop from '@/../public/lottie/hero-lottie.json';
 import animationDataMobile from '@/../public/lottie/hero-lottie-mobile.json';
 import { useLottie } from 'lottie-react';
-import { useState } from 'react';
-import { useEffect } from 'react';
 
 export const MyLottieComponentDesktop = () => {
     const defaultOptions = {

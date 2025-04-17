@@ -14,13 +14,13 @@ import { seoPlugin } from '@payloadcms/plugin-seo';
 import { FAQ } from '@/app/(payload)/globals/faq';
 import { CaseStudies } from '@/app/(payload)/collections/case-studies';
 import { ContactForm } from './(payload)/collections/contact-form';
-
+import { Projekte } from './(payload)/collections/projekte';
 export default buildConfig({
     // If you'd like to use Rich Text, pass your editor here
     editor: lexicalEditor(),
 
     // Define and configure your collections in this array
-    collections: [Media, Blog, Author, CaseStudies, ContactForm],
+    collections: [Media, Blog, Author, CaseStudies, ContactForm, Projekte],
 
     // Define and configure your globals in this array
     globals: [Impressum, Datenschutz, FAQ],

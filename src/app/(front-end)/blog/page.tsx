@@ -1,14 +1,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Calendar, Clock, User } from 'lucide-react';
+import { Calendar, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { getPayload } from 'payload';
 import payloadConfig from '@/app/payload.config';
 import HeaderSection from '@/components/header-section';
+import type { Blog, Media } from '../../../../payload-types';
 
 export const metadata = {
-    title: 'Blog | WebDesignify',
+    title: 'Blog - Webdesignify',
     description: 'Aktuelle Artikel über Webdesign, Entwicklung und digitale Strategien',
 };
 
@@ -39,7 +40,7 @@ export default async function BlogPage() {
 
                     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
                         {posts.docs.length > 0 ? (
-                            posts.docs.map((post: any) => (
+                            posts.docs.map((post: Blog) => (
                                 <Link
                                     key={post.id}
                                     href={`/blog/${post.slug}`}
@@ -47,7 +48,7 @@ export default async function BlogPage() {
                                 >
                                     <div className='relative h-[200px] w-full overflow-hidden'>
                                         <Image
-                                            src={post.image?.url || '/placeholder.svg'}
+                                            src={(post.image as Media)?.url || '/placeholder.svg'}
                                             alt={post.title}
                                             fill
                                             className='object-cover transition-transform duration-500 group-hover:scale-105'

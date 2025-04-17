@@ -1,0 +1,15 @@
+import { Metadata } from 'next';
+import Projects from '@/components/projects';
+
+export const metadata: Metadata = {
+    title: 'Meine Projekte - Webdesignify',
+    description: 'Entdecken Sie meine bisherigen Projekte und Leistungen',
+};
+
+export default async function Projects() {
+    return (
+        <main className='py-8 md:py-12'>
+            <Projects />
+        </main>
+    );
+}

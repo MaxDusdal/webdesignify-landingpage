@@ -2,10 +2,11 @@ import { getPayload } from 'payload';
 import { notFound } from 'next/navigation';
 import config from '@payload-config';
 import { PayloadLexicalReactRenderer, PayloadLexicalReactRendererContent } from '@atelier-disko/payload-lexical-react-renderer';
-import { TableOfContents } from '@/components/TableOfContents';
+import { TableOfContents } from '@/components/table-of-contents';
 import { customElementRenderers } from '@/lib/lexicalRenderers';
 import { GlobalSlug } from 'payload';
 import { RefreshRouteOnSave } from '@/components/refresh-route-on-save';
+import { Impressum } from '../../payload-types';
 type LegalPageProps = {
     slug: 'impressum' | 'datenschutz';
 };
@@ -22,7 +23,7 @@ async function getLegalContent(slug: string) {
         return null;
     }
 
-    return content;
+    return content as Impressum;
 }
 
 export default async function LegalPage({ slug }: LegalPageProps) {

@@ -1,47 +1,50 @@
-'use client';
-
-import { ArrowRight, Mail, Server, Link, Cloud, Calendar, HelpCircle, DollarSign, CheckCircle, UserCheck, Lock, Monitor, Shield } from 'lucide-react';
 import SocialProof from '@/components/social-proof';
 import Blog from '@/components/blog';
 import Subservices from '@/components/subservices';
 import HeaderSection from '@/components/header-section';
 import Timeline, { TimelineStep } from '@/components/timeline';
 import ServicesCtaSection from '@/components/services-cta-section';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'IT-Lösungen aus Mannheim - Webdesignify',
+    description: 'Ob E-Mails, Mail-Server, API-Anbindungen oder Cloud-Lösungen - ich entwickle handgemachte IT-Lösungen für Ihre Geschäftsziele!',
+};
 
 export default function WebDesign() {
     const subServices = [
         {
-            icon: Mail,
+            icon: 'Mail',
             title: 'Email-Kampagnen',
             description:
                 'Sie möchten mit E-Mails Marketing betreiben? Ich berate Sie in Ihren Möglichkeiten und richte ggf. Newsletter o. ä. für Sie ein.',
         },
         {
-            icon: Server,
+            icon: 'Server',
             title: 'Mail-Server',
             description:
                 'Sie benötigen eine E-Mail-Adresse mit ihrer eigenen Domain? Ich mache Ihre Wunschdomain (Unternehmen.de) verfügbar und richte einen entsprechenden Mail-Server ein.',
         },
         {
-            icon: Link,
+            icon: 'Link',
             title: 'API-Anbindungen',
             description:
                 'Sie möchten unterschiedliche Plattformen miteinander verknüpfen? Ich programmiere Back-Ends, welche diese per API-Schnittstelle miteinander verbindet.',
         },
         {
-            icon: Cloud,
+            icon: 'Cloud',
             title: 'Cloud-Lösungen',
             description:
                 'Sie brauchen eine zuverlässige Cloud-Lösung für Ihr Unternehmen? Ich berate Sie und richte eine Cloud-Lösung ein, damit Sie keine Angst mehr vor Datenverlust haben müssen.',
         },
         {
-            icon: Calendar,
+            icon: 'Calendar',
             title: 'Booking-System',
             description:
                 'Sie möchten Online-Reservierungen für Ihre Unterkunft, Ihr Restaurant o. ä. entgegennehmen können? Gerne schlage ich Lösungen vor und entwickle bzw. richte ein entsprechendes System ein.',
         },
         {
-            icon: HelpCircle,
+            icon: 'HelpCircle',
             title: 'Ein anderes Anliegen?',
             description: 'Sie haben ein spezifischeres Anliegen? Kontaktieren Sie mich gerne für eine schnelle und einfache Beratung.',
         },
@@ -49,37 +52,37 @@ export default function WebDesign() {
 
     const websiteServices = [
         {
-            icon: DollarSign,
+            icon: 'DollarSign',
             title: 'Kostengünstig',
             description:
                 'Ich garantiere Sie zu allen möglichen Lösungen zu beraten und Ihnen aufzuzeigen welche Lösung am optimalsten ist. Dabei spielen die Kosten natürlich auch eine Rolle.',
         },
         {
-            icon: CheckCircle,
+            icon: 'CheckCircle',
             title: 'Reibungslos',
             description:
                 'Es ist wichtig, dass alle implementierten Systeme eine Erleichterung im Kerngeschäft schaffen. Ich stelle sicher, dass Sie durch zusätzliche technische Anbindungen nicht aufgehalten werden.',
         },
         {
-            icon: UserCheck,
+            icon: 'UserCheck',
             title: 'Coaching',
             description:
                 'Ihre Mitarbeiter haben womöglich auch Zugriff auf die integrierten Systeme. Deswegen biete ich ein Coaching mit Ihren Mitarbeitern an, damit diese nicht durch Unklarheiten aufgehalten werden.',
         },
         {
-            icon: Lock,
+            icon: 'Lock',
             title: 'DSGVO-konform',
             description:
                 'Datenschutz steht an erster Stelle. Die Daten Ihrer Kunden sind äußerst wichtig, ein Datenleck oder -verlust könnte drastische Auswirkungen haben. Meine Lösungen stellen sicher, dass dies nicht passiert.',
         },
         {
-            icon: Shield,
+            icon: 'Shield',
             title: 'Absolute Sicherheit',
             description:
                 'Alle hauseigenen Systeme von Webdesignify werden mit hohem Fokus auf Sicherheit erstellt. Bei Ihren Daten gibt es keinen Spielraum für fahrlässige Sicherheitslücken.',
         },
         {
-            icon: Monitor,
+            icon: 'Monitor',
             title: 'Monitoring',
             description:
                 'Damit das integrierte System auch nicht plötzlich für Probleme sorgt, stelle ich sicher, dass Ihr System 24/7 online ist. Bei Problemen garantiere ich eine Ausfallzeit von maximal 2 Stunden.',
@@ -117,7 +120,7 @@ export default function WebDesign() {
                     buttons={[
                         {
                             text: 'Kontakt aufnehmen',
-                            icon: ArrowRight,
+                            withArrow: true,
                         },
                         {
                             text: 'Referenzen ansehen',

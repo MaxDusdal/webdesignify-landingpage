@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import LegalPage from '@/components/legal-page';
 
 export const metadata: Metadata = {
-    title: 'Impressum | Webdesignify',
+    title: 'Impressum - Webdesignify',
     description: 'Impressum von Webdesignify Maximilian Tim Dusdal',
 };
 

@@ -6,27 +6,11 @@ import Link from 'next/link';
 import { ArrowRight, Calendar, Clock, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-
-// Define BlogPost type based on the CMS structure
-interface BlogPost {
-    id: string;
-    title: string;
-    slug: string;
-    excerpt: string;
-    date: string;
-    readTime?: number;
-    category: string;
-    image: {
-        url: string;
-    };
-    author: {
-        name: string;
-    };
-}
+import type { Author, Blog, Media } from '../../payload-types';
 
 export default function Blog() {
     const blogRef = useRef<HTMLDivElement>(null);
-    const [posts, setPosts] = useState<BlogPost[]>([]);
+    const [posts, setPosts] = useState<Blog[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isVisible, setIsVisible] = useState(false);
 
@@ -121,7 +105,7 @@ export default function Blog() {
                               >
                                   <div className='relative h-[200px] w-full overflow-hidden'>
                                       <Image
-                                          src={post.image?.url || '/placeholder.svg'}
+                                          src={(post.image as Media)?.url || '/placeholder.svg'}
                                           alt={post.title}
                                           fill
                                           className='object-cover transition-transform duration-500 group-hover:scale-105'
@@ -140,7 +124,7 @@ export default function Blog() {
                                       <div className='flex items-center text-sm text-muted-foreground mt-auto pt-4 border-t border-border/40'>
                                           <div className='flex items-center mr-4'>
                                               <User className='h-4 w-4 mr-1' />
-                                              {post.author?.name}
+                                              {(post.author as Author)?.name}
                                           </div>
                                           <div className='flex items-center mr-4'>
                                               <Calendar className='h-4 w-4 mr-1' />

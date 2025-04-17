@@ -1,12 +1,13 @@
 'use client';
 
-import { LucideIcon } from 'lucide-react';
+import { LucideIcon, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
 interface ButtonProps {
     text: string;
+    withArrow?: boolean;
     variant?: 'default' | 'link';
     icon?: LucideIcon;
     onClick?: () => void;
@@ -107,7 +108,6 @@ export default function HeaderSection({
                             custom={4}
                         >
                             {buttons.map((button, index) => {
-                                const Icon = button.icon;
                                 return (
                                     <Button
                                         key={index}
@@ -117,7 +117,7 @@ export default function HeaderSection({
                                         onClick={button.onClick}
                                     >
                                         {button.text}
-                                        {Icon && <Icon className='ml-2 h-4 w-4 transition-transform group-hover:translate-x-1' />}
+                                        {button.withArrow && <ArrowRight className='ml-2 h-4 w-4 transition-transform group-hover:translate-x-1' />}
                                     </Button>
                                 );
                             })}

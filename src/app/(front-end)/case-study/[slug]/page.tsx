@@ -1,3 +1,5 @@
+import React from 'react';
+
 import CaseStudyHero from '@/components/case-study/case-study-hero';
 import CaseStudyOverview from '@/components/case-study/case-study-overview';
 import CaseStudyChallenge from '@/components/case-study/case-study-challenge';
@@ -8,7 +10,10 @@ import CaseStudyConclusion from '@/components/case-study/case-study-conclusion';
 import { getPayload } from 'payload';
 import payloadConfig from '@/app/payload.config';
 import { CaseStudy } from '../../../../../payload-types';
-import { RefreshRouteOnSave } from '@/components/refresh-route-on-save';
+import { notFound } from 'next/navigation';
+interface CaseStudyPageProps {
+    params: Promise<{ slug: string }>
+}
 
 async function getCaseStudy(slug: string) {
     const payload = await getPayload({ config: payloadConfig });
@@ -24,12 +29,12 @@ async function getCaseStudy(slug: string) {
     return caseStudy.docs[0] as CaseStudy;
 }
 
-export default async function CaseStudyPage({ params }: { params: Promise<{ slug: string }> }) {
-    const slug = (await params).slug;
+export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
+    const { slug } = await params;
     const caseStudy = await getCaseStudy(slug);
 
     if (!caseStudy) {
-        return <div>Case Study not found</div>;
+        notFound();
     }
 
     return (
@@ -41,7 +46,6 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             <CaseStudyResults caseStudy={caseStudy} />
             <CaseStudyTestimonial caseStudy={caseStudy} />
             <CaseStudyConclusion caseStudy={caseStudy} />
-            <RefreshRouteOnSave />
         </main>
     );
 }

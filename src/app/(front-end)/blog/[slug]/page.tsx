@@ -8,12 +8,20 @@ import { PayloadLexicalReactRenderer, PayloadLexicalReactRendererContent } from 
 import { customElementRenderers } from '@/lib/lexicalRenderers';
 import { RefreshRouteOnSave } from '@/components/refresh-route-on-save';
 import { Author, Blog, Media } from '../../../../../payload-types';
-export default async function BlogPost({ params }: { params: { slug: string } }) {
+import { Metadata } from 'next';
+
+interface BlogPostPageProps {
+    params: Promise<{ slug: string }>
+  }
+  
+
+export default async function BlogPost({ params }: BlogPostPageProps) {
+    const { slug } = await params;
     const payload = await getPayload({ config: payloadConfig });
     const posts = await payload.find({
         collection: 'blog',
         where: {
-            slug: { equals: params.slug },
+            slug: { equals: slug },
         },
         depth: 2,
     });
@@ -21,7 +29,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
     const relatedPosts = await payload.find({
         collection: 'blog',
         where: {
-            slug: { not_equals: params.slug },
+            slug: { not_equals: slug },
         },
     });
 
@@ -92,7 +100,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
                             {relatedPosts.docs.map((relatedPost) => (
                                 <Link
                                     key={relatedPost.id}
-                                    href={`/blog/${relatedPost.id}`}
+                                    href={`/blog/${relatedPost.slug}`}
                                     className='group relative flex flex-col overflow-hidden rounded-lg border border-border/40 bg-card shadow-sm transition-all duration-300 hover:shadow-md hover:border-primary/20'
                                 >
                                     <div className='relative h-[140px] w-full overflow-hidden'>
@@ -126,11 +134,14 @@ export default async function BlogPost({ params }: { params: { slug: string } })
     );
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
+export async function generateMetadata(
+  props: BlogPostPageProps
+): Promise<Metadata> {
+    const { slug } = await props.params;
     const payload = await getPayload({ config: payloadConfig });
     const post = await payload.find({
         collection: 'blog',
-        where: { slug: { equals: params.slug } },
+        where: { slug: { equals: slug } },
     });
 
     const postData = post.docs[0] as Blog & { author: Author };

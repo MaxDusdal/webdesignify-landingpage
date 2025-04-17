@@ -1,64 +1,51 @@
-'use client';
-
-import {
-    ArrowRight,
-    Search,
-    Building2,
-    FileText,
-    PanelTop,
-    ShoppingCart,
-    Cpu,
-    Layers,
-    LineChart,
-    FileEdit,
-    Target,
-    Smartphone,
-    Link2,
-    Shield,
-    Zap,
-    Wrench,
-} from 'lucide-react';
 import SocialProof from '@/components/social-proof';
 import Blog from '@/components/blog';
 import Subservices from '@/components/subservices';
 import HeaderSection from '@/components/header-section';
 import Timeline, { TimelineStep } from '@/components/timeline';
 import ServicesCtaSection from '@/components/services-cta-section';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Webdesign aus Mannheim - Webdesignify',
+    description:
+        'Eine gut gestaltete Webseite ist der Schlüssel zu einem erfolgreichen Online-Auftritt. Ich biete maßgeschneiderte Webdesign- und Entwicklungsdienste an, die nicht nur ästhetisch ansprechend sind, sondern auch funktional und benutzerfreundlich. Gemeinsam verwandeln wir Ihre Vision in eine leistungsstarke Webseite, die Ihre Besucher begeistert und Ihre Geschäftsziele unterstützt.',
+};
 
 export default function WebDesign() {
     const subServices = [
         {
-            icon: Building2,
+            icon: 'Building2',
             title: 'Unternehmenswebsite',
             description:
                 'Ihre professionelle Unternehmenswebseite kann schnell, unkompliziert und individuell erstellt werden. Der einzigartige Aufbau und Design Ihrer Webseite steht dabei an erster Stelle.',
         },
         {
-            icon: PanelTop,
+            icon: 'PanelTop',
             title: 'Landingpages',
             description:
                 'Eine strategisch optimierte Landingpage passgenau für Ihre Zielgruppe kann Ihnen helfen Ihre Conversionrate zu steigern und für einen höheren Erfolg Ihres Produktes sorgen.',
         },
         {
-            icon: FileText,
+            icon: 'FileText',
             title: 'Blog',
             description:
                 'Einen Blog mit allen nötigen Features wie Kategorien, Suchfunktion und wunderbaren SEO-Funktionen. Mit dem Webflow CMS können Sie jederzeit, einfach und schnell Blogbeiträge individuell erstellen.',
         },
         {
-            icon: ShoppingCart,
+            icon: 'ShoppingCart',
             title: 'Onlineshops',
             description:
                 'Ein vollfunktionsfähiger Onlineshop welcher nach Ihrem Belieben designt wird und genau auf Ihre Zielgruppe zugeschnitten ist. Auch die Zahlungsabwicklung ist dank Stripe kein Aufwand mehr.',
         },
         {
-            icon: Cpu,
+            icon: 'Cpu',
             title: 'Web-Apps',
             description:
                 'Sie brauchen Ihre ganz eigene Lösung? Ich kann für Sie eine komplette Web-App konzipieren, entwerfen und programmieren. Kontaktieren Sie mich für eine individuelle Beratung.',
         },
         {
-            icon: Layers,
+            icon: 'Layers',
             title: 'Prototypen',
             description:
                 'Sie haben eine Idee für eine Software oder ähnliche Lösung? Ich kann für Sie Prototypen wie bspw. Klickdummies erstellen damit Sie Ihre Idee validieren können bevor Sie Geld investieren.',
@@ -67,55 +54,55 @@ export default function WebDesign() {
 
     const websiteServices = [
         {
-            icon: Search,
+            icon: 'Search',
             title: 'SEO',
             description:
                 'SEO ist in jedem Projekt inbegriffen und entscheidet darüber, wie hoch Ihre Seite auf Google erscheint, denn: Ein besseres Google-Ranking bedeutet mehr Besucher auf Ihrer Webseite.',
         },
         {
-            icon: FileEdit,
+            icon: 'FileEdit',
             title: 'Content-Management',
             description:
                 'Ihre Webseite sollte auch von Ihnen bearbeitet werden können. Mit meinem CMS können Sie problemlos neuen Content wie Blog-Posts, Bilder oder Dateien selbst hochladen.',
         },
         {
-            icon: LineChart,
+            icon: 'LineChart',
             title: 'Website Analytics',
             description:
                 'Ihr Einblick in das Nutzerverhalten Ihrer Kunden - Finden Sie heraus, was sich verbessern lässt und wie Ihre Webseite abschneidet.',
         },
         {
-            icon: Target,
+            icon: 'Target',
             title: 'Erfolgsorientiert',
             description:
                 'Eine Webseite muss sich lohnen - Ich baue erfolgsorientierte Webseiten, die nicht nur schön aussehen sodern auch einen geschäftlichen Mehrwert bringen.',
         },
         {
-            icon: Smartphone,
+            icon: 'Smartphone',
             title: 'Mobile-Responsive',
             description:
                 'Inzwischen besteht 60 % des Online-Traffics aus mobilen Endgeräten. Entsprechend sorge ich dafür, dass Ihre Webseite an alle Geräte angepasst ist.',
         },
         {
-            icon: Link2,
+            icon: 'Link2',
             title: 'Integrationen',
             description:
                 'Anlaufstationen für Kunden - Auf Wunsch binde ich Ihre Booking-Plattform, Support-Plattform o. ä. externe Plattformen nahtlos in Ihre Webseite mit ein.',
         },
         {
-            icon: Shield,
+            icon: 'Shield',
             title: 'Absolute Sicherheit',
             description:
                 'Alle Webseiten werden nach Branchen-Standards verschlüsselt und auch gewartet. Beim Thema Sicherheit, sind Sie mit mir auf der sicheren Seite.',
         },
         {
-            icon: Zap,
+            icon: 'Zap',
             title: 'Beste Ladezeiten',
             description:
                 'Ich optimiere alle Bilder und den Code der Webseite um die besten Ladezeiten Ihrer Webseite zu garantieren denn lange Ladezeiten führen zu abspringenden Nutzern.',
         },
         {
-            icon: Wrench,
+            icon: 'Wrench',
             title: 'Ohne Wartung',
             description: 'Da wir Webflow nutzen gibt es keine Notwendigkeit die Webseite regelmäßig zu warten oder zu updaten.',
         },
@@ -151,7 +138,7 @@ export default function WebDesign() {
                     buttons={[
                         {
                             text: 'Kontakt aufnehmen',
-                            icon: ArrowRight,
+                            withArrow: true,
                         },
                         {
                             text: 'Referenzen ansehen',
