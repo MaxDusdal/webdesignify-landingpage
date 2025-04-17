@@ -43,10 +43,8 @@ export default async function LegalPage({ slug }: LegalPageProps) {
                     elementRenderers={customElementRenderers}
                 />
             </div>
-            <div className='mt-8 text-sm text-gray-600'>
-                Zuletzt aktualisiert: {new Date(content.lastUpdated).toLocaleDateString('de-DE')}
-            </div>
+            <div className='mt-8 text-sm text-gray-600'>Zuletzt aktualisiert: {new Date(content.lastUpdated).toLocaleDateString('de-DE')}</div>
             <RefreshRouteOnSave />
         </div>
     );
-} 
+}
