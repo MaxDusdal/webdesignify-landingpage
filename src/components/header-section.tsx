@@ -60,7 +60,7 @@ export default function HeaderSection({
                     {subtitle && (
                         <motion.p
                             className={cn(
-                                'text-sm md:text-base font-black uppercase font-stretch-200% mb-2',
+                                'text-sm md:text-base font-black uppercase font-stretch-200% ',
                                 variant === 'default' ? 'text-black' : 'text-secondary-foreground'
                             )}
                             initial={animate ? "hidden" : "visible"}

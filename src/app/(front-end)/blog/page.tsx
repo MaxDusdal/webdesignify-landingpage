@@ -27,24 +27,14 @@ export default async function BlogPage() {
     });
 
     return (
-        <div className='min-h-screen bg-background flex flex-col'>
-            <main className='flex-grow '>
+        <div className='bg-background flex flex-col'>
+            <main className=''>
                 <div className='container px-4 max-w-7xl mx-auto'>
                     <HeaderSection
                         headerType='h2'
                         subtitle='BLOG'
-                        title='Unser Blog'
-                        description='Gedanken, Tipps und Erkenntnisse zum Webentwicklung und digitalen Marketing'
-                        buttons={[
-                            {
-                                text: 'Jetzt kontaktieren',
-                                variant: 'default',
-                            },
-                            {
-                                text: 'Alle Artikel ansehen',
-                                variant: 'link',
-                            },
-                        ]}
+                        title='Mein Blog'
+                        description='Gedanken, Tipps und Erkenntnisse zu Webentwicklung, Geschäftsprozesse und digitalen Marketing'
                     />
 
                     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
@@ -75,10 +65,6 @@ export default async function BlogPage() {
 
                                         <div className='flex items-center text-sm text-muted-foreground mt-auto pt-4 border-t border-border/40'>
                                             <div className='flex items-center mr-4'>
-                                                <User className='h-4 w-4 mr-1' />
-                                                {post.author?.name}
-                                            </div>
-                                            <div className='flex items-center mr-4'>
                                                 <Calendar className='h-4 w-4 mr-1' />
                                                 {new Date(post.date).toLocaleDateString('de-DE', {
                                                     day: '2-digit',
@@ -89,7 +75,7 @@ export default async function BlogPage() {
                                             {post.readTime && (
                                                 <div className='flex items-center'>
                                                     <Clock className='h-4 w-4 mr-1' />
-                                                    {post.readTime} min read
+                                                    {post.readTime} min Lesezeit
                                                 </div>
                                             )}
                                         </div>

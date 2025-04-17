@@ -36,50 +36,49 @@ export default async function BlogPost({ params }: { params: { slug: string } })
                 <div className='absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent'></div>
             </div>
 
-            <div className='container px-4 md:px-6 -mt-20 relative z-10'>
-                <div className='max-w-3xl mx-auto bg-card rounded-lg border border-border/40 shadow-lg p-6 md:p-8 lg:p-10'>
-                    <Badge variant='secondary' className='bg-primary text-primary-foreground mb-4'>
-                        {postData.category}
-                    </Badge>
+            <div className='container px-4 md:px-6 -mt-20 relative z-10 mx-auto'>
+                <div className='max-w-3xl mx-auto'>
+                    {/* Header Card with Metadata */}
+                    <div className='bg-card rounded-lg border border-border/40 shadow-lg p-6 md:p-8 lg:p-10 mb-8'>
+                        <Badge variant='secondary' className='bg-primary text-primary-foreground mb-4'>
+                            {postData.category}
+                        </Badge>
 
-                    <h1 className='text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-4'>{postData.title}</h1>
+                        <h1 className='text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-4'>{postData.title}</h1>
 
-                    <div className='flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-8 pb-8 border-b border-border/40'>
-                        <div className='flex items-center gap-2'>
-                            <div className='relative w-8 h-8 rounded-full overflow-hidden'>
-                                <Image src={authorImage.url ?? '/placeholder.svg'} alt={postData.author?.name ?? ''} fill className='object-cover' />
+                        <div className='flex flex-wrap items-center gap-4 text-sm text-muted-foreground'>
+                            <div className='flex items-center gap-2'>
+                                <div className='relative w-8 h-8 rounded-full overflow-hidden'>
+                                    <Image
+                                        src={authorImage.url ?? '/placeholder.svg'}
+                                        alt={postData.author?.name ?? ''}
+                                        fill
+                                        className='object-cover'
+                                    />
+                                </div>
+                                <span>{postData.author?.name}</span>
                             </div>
-                            <span>{postData.author?.name}</span>
-                        </div>
-                        <div className='flex items-center gap-1'>
-                            <Calendar className='h-4 w-4' />
-                            <span>{new Date(postData.date).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' })}</span>
-                        </div>
-                        {postData.readTime && (
                             <div className='flex items-center gap-1'>
-                                <Clock className='h-4 w-4' />
-                                <span>{postData.readTime} Minuten Lesezeit</span>
+                                <Calendar className='h-4 w-4' />
+                                <span>
+                                    {new Date(postData.date).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' })}
+                                </span>
                             </div>
-                        )}
+                            {postData.readTime && (
+                                <div className='flex items-center gap-1'>
+                                    <Clock className='h-4 w-4' />
+                                    <span>{postData.readTime} Minuten Lesezeit</span>
+                                </div>
+                            )}
+                        </div>
                     </div>
 
-                    {/* Blog Content */}
+                    {/* Blog Content - No card styling */}
                     <div className='prose prose-lg max-w-none'>
                         <PayloadLexicalReactRenderer
                             content={postData.content as PayloadLexicalReactRendererContent}
                             elementRenderers={customElementRenderers}
                         />
-                    </div>
-
-                    {/* Author Bio */}
-                    <div className='mt-12 p-6 bg-card rounded-lg border border-border/40 flex flex-col md:flex-row gap-6 items-center md:items-start'>
-                        <div className='relative w-20 h-20 rounded-full overflow-hidden flex-shrink-0'>
-                            <Image src={authorImage.url ?? '/placeholder.svg'} alt={postData.author?.name ?? ''} fill className='object-cover' />
-                        </div>
-                        <div>
-                            <h3 className='text-lg font-bold mb-2'>About {postData.author?.name}</h3>
-                            <p className='text-muted-foreground mb-4'>{postData.author?.bio}</p>
-                        </div>
                     </div>
                 </div>
             </div>

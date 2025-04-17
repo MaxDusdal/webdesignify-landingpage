@@ -75,7 +75,7 @@ export default function Blog() {
     }, []);
 
     return (
-        <section id='blog' className='w-full py-12 md:py-24 bg-background/50' ref={blogRef}>
+        <section id='blog' className='w-full pt-12 md:pt-24 bg-background/50' ref={blogRef}>
             <div className='container px-4 md:px-6 max-w-7xl mx-auto'>
                 <div className='flex flex-col md:flex-row justify-between items-start md:items-center mb-12'>
                     <div className='space-y-2 mb-6 md:mb-0'>
