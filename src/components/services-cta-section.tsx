@@ -13,9 +13,11 @@ export default function ServicesCtaSection({ header, description, buttonText }: 
                         </p>
                     </div>
                     <div className='md:w-1/3 flex justify-center md:justify-end'>
-                        <Button size='lg' variant='default' className='group'>
-                            {buttonText}
-                            <ArrowRight className='ml-2 h-4 w-4 transition-transform group-hover:translate-x-1' />
+                        <Button size='lg' variant='default' className='group' asChild>
+                            <a href="/kontakt">
+                                {buttonText}
+                                <ArrowRight className='ml-2 h-4 w-4 transition-transform group-hover:translate-x-1' />
+                            </a>
                         </Button>
                     </div>
                 </div>

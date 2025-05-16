@@ -7,6 +7,10 @@ export const ContactForm: CollectionConfig = {
         useAsTitle: 'name',
         defaultColumns: ['name', 'email', 'createdAt', 'status'],
     },
+    access: {
+        read: () => false,
+        readVersions: () => false,
+    },
     fields: [
         {
             name: 'name',

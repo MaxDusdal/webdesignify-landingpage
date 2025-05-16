@@ -74,11 +74,11 @@ export default function Differentiators() {
                             <div className='flex flex-col items-center justify-center p-6 text-center'>
                                 <div className='relative w-24 h-24 mb-4 overflow-hidden rounded-full border-2 border-accent/30'>
                                     <Image
-                                        src='/placeholder.svg?height=96&width=96'
+                                        src='/images/max_dusdal.jpg'
                                         alt='Profile Photo'
                                         width={96}
                                         height={96}
-                                        className='object-cover'
+                                        className='object-cover w-full h-full object-center'
                                     />
                                 </div>
 
@@ -92,7 +92,7 @@ export default function Differentiators() {
                                     </div>
                                     <div className='flex items-center gap-2 text-xs'>
                                         <Phone className='h-4 w-4 text-accent' />
-                                        <span>+49 174 525 9559</span>
+                                        <span>+49 174 525 9553</span>
                                     </div>
                                 </div>
                             </div>

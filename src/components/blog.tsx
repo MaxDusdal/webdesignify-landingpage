@@ -3,10 +3,10 @@
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, Calendar, Clock, User } from 'lucide-react';
+import { ArrowRight, Calendar, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import type { Author, Blog, Media } from '../../payload-types';
+import type { Blog, Media } from '../../payload-types';
 
 export default function Blog() {
     const blogRef = useRef<HTMLDivElement>(null);
@@ -122,10 +122,6 @@ export default function Blog() {
                                       <p className='text-muted-foreground mb-4 flex-grow'>{post.excerpt}</p>
 
                                       <div className='flex items-center text-sm text-muted-foreground mt-auto pt-4 border-t border-border/40'>
-                                          <div className='flex items-center mr-4'>
-                                              <User className='h-4 w-4 mr-1' />
-                                              {(post.author as Author)?.name}
-                                          </div>
                                           <div className='flex items-center mr-4'>
                                               <Calendar className='h-4 w-4 mr-1' />
                                               {new Date(post.date).toLocaleDateString('de-DE', {
