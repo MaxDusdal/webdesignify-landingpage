@@ -1,7 +1,4 @@
-import Hero from '@/components/hero';
-import SocialProof from '@/components/social-proof';
-import Services from '@/components/services';
-import Differentiators from '@/components/differentiators';
+
 import Blog from '@/components/blog';
 import FAQSection from '@/components/faq-section';
 import { Metadata } from 'next';
@@ -15,10 +12,6 @@ export const metadata: Metadata = {
 export default function Home() {
     return (
         <>
-            <Hero />
-            <SocialProof />
-            <Services />
-            <Differentiators />
             <Projects />        
             <FAQSection />
             <Blog />
