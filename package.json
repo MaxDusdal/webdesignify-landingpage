@@ -6,7 +6,7 @@
     "scripts": {
         "prebuild": "payload generate:types",
         "dev": "next dev --turbopack",
-        "build": "cross-env NODE_OPTIONS=--no-deprecation next build",
+        "build": "cross-env NODE_OPTIONS=--no-deprecation payload migrate && next build",
         "start": "next start",
         "lint": "next lint"
     },
