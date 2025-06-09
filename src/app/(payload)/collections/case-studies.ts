@@ -1,3 +1,4 @@
+import { revalidatePath } from "next/cache";
 import { CollectionConfig } from "payload";
 
 export const CaseStudies: CollectionConfig = {
@@ -426,6 +427,24 @@ export const CaseStudies: CollectionConfig = {
       ],
     },
   ],
+  hooks: {
+    afterChange: [
+      ({ operation }) => {
+        if (process.env.NODE_ENV === "production") {
+          try {
+            revalidatePath("/");
+            revalidatePath("/case-study");
+
+            console.log(
+              `Revalidated paths after ${operation} operation on case-studies collection`,
+            );
+          } catch (error) {
+            console.error("Failed to revalidate after case-studies change:", error);
+          }
+        }
+      },
+    ],
+  },
   admin: {
     useAsTitle: "title",
     livePreview: {

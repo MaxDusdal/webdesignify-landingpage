@@ -1,3 +1,4 @@
+import { revalidatePath } from "next/cache";
 import { GlobalConfig } from "payload";
 
 export const FAQ: GlobalConfig = {
@@ -46,4 +47,21 @@ export const FAQ: GlobalConfig = {
       ],
     },
   ],
+  hooks: {
+    afterChange: [
+      ({ context }) => {
+        if (process.env.NODE_ENV === "production") {
+          try {
+            revalidatePath("/");
+
+            console.log(
+              `Revalidated paths after ${context.operation} operation on faq collection`,
+            );
+          } catch (error) {
+            console.error("Failed to revalidate after faq change:", error);
+          }
+        }
+      },
+    ],
+  },
 };

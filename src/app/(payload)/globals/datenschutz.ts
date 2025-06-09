@@ -1,4 +1,6 @@
 import { GlobalConfig } from "payload";
+import { revalidatePath } from "next/cache";
+
 export const Datenschutz: GlobalConfig = {
   slug: "datenschutz",
   access: {
@@ -44,4 +46,21 @@ export const Datenschutz: GlobalConfig = {
       },
     },
   ],
+  hooks: {
+    afterChange: [
+      ({ context }) => {
+        if (process.env.NODE_ENV === "production") {
+          try {
+            revalidatePath("/datenschutz");
+
+            console.log(
+              `Revalidated paths after ${context.operation} operation on datenschutz collection`,
+            );
+          } catch (error) {
+            console.error("Failed to revalidate after datenschutz change:", error);
+          }
+        }
+      },
+    ],
+  },
 };

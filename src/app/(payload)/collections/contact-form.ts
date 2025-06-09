@@ -1,5 +1,6 @@
 import { CollectionConfig } from "payload";
 import { FORM_OPTIONS } from "@/lib/contact-form-schema";
+import { revalidatePath } from "next/cache";
 
 export const ContactForm: CollectionConfig = {
   slug: "contact-forms",
@@ -127,5 +128,22 @@ export const ContactForm: CollectionConfig = {
       },
     },
   ],
+  hooks: {
+    afterChange: [
+      ({ operation }) => {
+        if (process.env.NODE_ENV === "production") {
+          try {
+            revalidatePath("/kontakt");
+
+            console.log(
+              `Revalidated paths after ${operation} operation on contact-form collection`,
+            );
+          } catch (error) {
+            console.error("Failed to revalidate after contact-form change:", error);
+          }
+        }
+      },
+    ],
+  },
   timestamps: true,
 };

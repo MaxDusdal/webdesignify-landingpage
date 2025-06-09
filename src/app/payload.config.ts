@@ -40,7 +40,7 @@ export default buildConfig({
   // you don't need it!
 
   sharp,
-  serverURL: process.env.SERVER_URL || "http://localhost:3000",
+  serverURL: process.env.NEXT_PUBLIC_VERCEL_URL || "http://localhost:3000",
   telemetry: false,
 
   plugins: [
