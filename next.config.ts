@@ -8,6 +8,9 @@ const nextConfig: NextConfig = {
       {
         hostname: "localhost",
       },
+      {
+        hostname: "webdesignify.de",
+      }
     ],
   },
   async rewrites() {

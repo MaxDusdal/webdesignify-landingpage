@@ -7,7 +7,7 @@ import { ArrowRight, CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { CaseStudy } from '../../../payload-types';
-import HeaderSection from '@/components/header-section';
+import HeaderSection from '@/components/sections/header-section';
 import Link from 'next/link';
 
 export default function CaseStudySolution({ caseStudy }: { caseStudy: CaseStudy }) {

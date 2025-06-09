@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import HeaderSection from '@/components/header-section';
+import HeaderSection from '@/components/sections/header-section';
 import ContactContainer from '@/components/contact/contact-container';
 
 export const metadata: Metadata = {

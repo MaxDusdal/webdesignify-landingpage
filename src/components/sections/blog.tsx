@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { ArrowRight, Calendar, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import type { Blog, Media } from '../../payload-types';
+import type { Blog, Media } from '../../../payload-types';
 
 export default function Blog() {
     const blogRef = useRef<HTMLDivElement>(null);

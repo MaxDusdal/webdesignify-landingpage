@@ -1,9 +1,9 @@
-import SocialProof from '@/components/social-proof';
-import Blog from '@/components/blog';
+import SocialProof from '@/components/sections/social-proof';
+import Blog from '@/components/sections/blog';
 import Subservices from '@/components/subservices';
-import HeaderSection from '@/components/header-section';
+import HeaderSection from '@/components/sections/header-section';
 import Timeline, { TimelineStep } from '@/components/timeline';
-import ServicesCtaSection from '@/components/services-cta-section';
+import ServicesCtaSection from '@/components/sections/services-cta-section';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {

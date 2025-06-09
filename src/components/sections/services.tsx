@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { TrendingUp, Globe, Server, MessageCircle, ArrowRight } from 'lucide-react';
-import HeaderSection from '@/components/header-section';
+import HeaderSection from '@/components/sections/header-section';
 
 export default function Services() {
     const services = [

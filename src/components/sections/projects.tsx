@@ -1,10 +1,10 @@
-import { CaseStudy, Media, Projekte } from '../../payload-types';
+import { CaseStudy, Media, Projekte } from '../../../payload-types';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { getPayload } from 'payload';
-import HeaderSection from '@/components/header-section';
+import HeaderSection from '@/components/sections/header-section';
 import payloadConfig from '@/app/payload.config';
 interface Tag {
     tag: string;

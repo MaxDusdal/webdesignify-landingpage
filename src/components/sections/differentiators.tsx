@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import Image from 'next/image';
 import { motion, useInView } from 'framer-motion';
 import { Mail, Phone, CheckCircle } from 'lucide-react';
-import HeaderSection from '@/components/header-section';
+import HeaderSection from '@/components/sections/header-section';
 
 export default function Differentiators() {
     const cardRef = useRef<HTMLDivElement>(null);

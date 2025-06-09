@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import HeaderSection from '@/components/header-section';
+import HeaderSection from '@/components/sections/header-section';
 
 // ClientLogo Component
 function ClientLogo({ src, alt, opacity = 80 }: { src: string; alt: string; opacity?: number }) {

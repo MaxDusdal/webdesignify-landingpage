@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Code, Layout, Zap } from 'lucide-react';
-import { MyLottieComponentDynamic } from './hero-lottie';
+import { MyLottieComponentDynamic } from '../hero-lottie';
 import Link from 'next/link';
 export default function Hero() {
     return (

@@ -1,5 +1,5 @@
-import Navbar from '@/components/navbar';
-import Footer from '@/components/footer';
+import Navbar from '@/components/sections/navbar';
+import Footer from '@/components/sections/footer';
 
 export default function FrontEndLayout({ children }: { children: React.ReactNode }) {
     return (

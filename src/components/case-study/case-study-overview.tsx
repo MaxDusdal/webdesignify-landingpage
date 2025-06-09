@@ -2,7 +2,7 @@
 
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import HeaderSection from '@/components/header-section';
+import HeaderSection from '@/components/sections/header-section';
 import { CaseStudy } from '../../../payload-types';
 import { PayloadLexicalReactRenderer, PayloadLexicalReactRendererContent } from '@atelier-disko/payload-lexical-react-renderer';
 import { customElementRenderers } from '@/lib/lexicalRenderers';

@@ -1,8 +1,8 @@
 import { getPayload, GlobalSlug } from 'payload';
 import payloadConfig from '@/app/payload.config';
 import FAQ from '@/components/faq';
-import HeaderSection from '@/components/header-section';
-import { Faq } from '../../payload-types';
+import HeaderSection from '@/components/sections/header-section';
+import { Faq } from '../../../payload-types';
 
 export async function FAQSection() {
     const payload = await getPayload({ config: payloadConfig });

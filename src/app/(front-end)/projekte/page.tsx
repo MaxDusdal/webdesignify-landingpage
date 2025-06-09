@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import Projects from '@/components/projects';
+import Projects from '@/components/sections/projects';
 
 export const metadata: Metadata = {
     title: 'Meine Projekte - Webdesignify',

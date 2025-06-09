@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { getPayload } from 'payload';
 import payloadConfig from '@/app/payload.config';
-import HeaderSection from '@/components/header-section';
+import HeaderSection from '@/components/sections/header-section';
 import type { Blog, Media } from '../../../../payload-types';
 
 export const metadata = {
