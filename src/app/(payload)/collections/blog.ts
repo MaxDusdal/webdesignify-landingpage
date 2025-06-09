@@ -87,7 +87,7 @@ export const Blog: CollectionConfig = {
     admin: {
         useAsTitle: 'title',
         livePreview: {
-            url: 'https://' + process.env.NEXT_PUBLIC_VERCEL_URL + '/blog/google-my-business',
+            url: 'https://' + process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL + '/blog/google-my-business',
             breakpoints: [
                 {
                     height: 1024,

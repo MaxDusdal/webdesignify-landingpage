@@ -13,53 +13,53 @@
  * via the `definition` "supportedTimezones".
  */
 export type SupportedTimezones =
-  | "Pacific/Midway"
-  | "Pacific/Niue"
-  | "Pacific/Honolulu"
-  | "Pacific/Rarotonga"
-  | "America/Anchorage"
-  | "Pacific/Gambier"
-  | "America/Los_Angeles"
-  | "America/Tijuana"
-  | "America/Denver"
-  | "America/Phoenix"
-  | "America/Chicago"
-  | "America/Guatemala"
-  | "America/New_York"
-  | "America/Bogota"
-  | "America/Caracas"
-  | "America/Santiago"
-  | "America/Buenos_Aires"
-  | "America/Sao_Paulo"
-  | "Atlantic/South_Georgia"
-  | "Atlantic/Azores"
-  | "Atlantic/Cape_Verde"
-  | "Europe/London"
-  | "Europe/Berlin"
-  | "Africa/Lagos"
-  | "Europe/Athens"
-  | "Africa/Cairo"
-  | "Europe/Moscow"
-  | "Asia/Riyadh"
-  | "Asia/Dubai"
-  | "Asia/Baku"
-  | "Asia/Karachi"
-  | "Asia/Tashkent"
-  | "Asia/Calcutta"
-  | "Asia/Dhaka"
-  | "Asia/Almaty"
-  | "Asia/Jakarta"
-  | "Asia/Bangkok"
-  | "Asia/Shanghai"
-  | "Asia/Singapore"
-  | "Asia/Tokyo"
-  | "Asia/Seoul"
-  | "Australia/Brisbane"
-  | "Australia/Sydney"
-  | "Pacific/Guam"
-  | "Pacific/Noumea"
-  | "Pacific/Auckland"
-  | "Pacific/Fiji";
+  | 'Pacific/Midway'
+  | 'Pacific/Niue'
+  | 'Pacific/Honolulu'
+  | 'Pacific/Rarotonga'
+  | 'America/Anchorage'
+  | 'Pacific/Gambier'
+  | 'America/Los_Angeles'
+  | 'America/Tijuana'
+  | 'America/Denver'
+  | 'America/Phoenix'
+  | 'America/Chicago'
+  | 'America/Guatemala'
+  | 'America/New_York'
+  | 'America/Bogota'
+  | 'America/Caracas'
+  | 'America/Santiago'
+  | 'America/Buenos_Aires'
+  | 'America/Sao_Paulo'
+  | 'Atlantic/South_Georgia'
+  | 'Atlantic/Azores'
+  | 'Atlantic/Cape_Verde'
+  | 'Europe/London'
+  | 'Europe/Berlin'
+  | 'Africa/Lagos'
+  | 'Europe/Athens'
+  | 'Africa/Cairo'
+  | 'Europe/Moscow'
+  | 'Asia/Riyadh'
+  | 'Asia/Dubai'
+  | 'Asia/Baku'
+  | 'Asia/Karachi'
+  | 'Asia/Tashkent'
+  | 'Asia/Calcutta'
+  | 'Asia/Dhaka'
+  | 'Asia/Almaty'
+  | 'Asia/Jakarta'
+  | 'Asia/Bangkok'
+  | 'Asia/Shanghai'
+  | 'Asia/Singapore'
+  | 'Asia/Tokyo'
+  | 'Asia/Seoul'
+  | 'Australia/Brisbane'
+  | 'Australia/Sydney'
+  | 'Pacific/Guam'
+  | 'Pacific/Noumea'
+  | 'Pacific/Auckland'
+  | 'Pacific/Fiji';
 
 export interface Config {
   auth: {
@@ -70,32 +70,26 @@ export interface Config {
     media: Media;
     blog: Blog;
     author: Author;
-    "case-studies": CaseStudy;
-    "contact-forms": ContactForm;
+    'case-studies': CaseStudy;
+    'contact-forms': ContactForm;
     projekte: Projekte;
     users: User;
-    "payload-locked-documents": PayloadLockedDocument;
-    "payload-preferences": PayloadPreference;
-    "payload-migrations": PayloadMigration;
+    'payload-locked-documents': PayloadLockedDocument;
+    'payload-preferences': PayloadPreference;
+    'payload-migrations': PayloadMigration;
   };
   collectionsJoins: {};
   collectionsSelect: {
     media: MediaSelect<false> | MediaSelect<true>;
     blog: BlogSelect<false> | BlogSelect<true>;
     author: AuthorSelect<false> | AuthorSelect<true>;
-    "case-studies": CaseStudiesSelect<false> | CaseStudiesSelect<true>;
-    "contact-forms": ContactFormsSelect<false> | ContactFormsSelect<true>;
+    'case-studies': CaseStudiesSelect<false> | CaseStudiesSelect<true>;
+    'contact-forms': ContactFormsSelect<false> | ContactFormsSelect<true>;
     projekte: ProjekteSelect<false> | ProjekteSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
-    "payload-locked-documents":
-      | PayloadLockedDocumentsSelect<false>
-      | PayloadLockedDocumentsSelect<true>;
-    "payload-preferences":
-      | PayloadPreferencesSelect<false>
-      | PayloadPreferencesSelect<true>;
-    "payload-migrations":
-      | PayloadMigrationsSelect<false>
-      | PayloadMigrationsSelect<true>;
+    'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
+    'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
+    'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
   };
   db: {
     defaultIDType: number;
@@ -112,7 +106,7 @@ export interface Config {
   };
   locale: null;
   user: User & {
-    collection: "users";
+    collection: 'users';
   };
   jobs: {
     tasks: unknown;
@@ -182,8 +176,8 @@ export interface Blog {
         version: number;
         [k: string]: unknown;
       }[];
-      direction: ("ltr" | "rtl") | null;
-      format: "left" | "start" | "center" | "right" | "end" | "justify" | "";
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
       indent: number;
       version: number;
     };
@@ -191,7 +185,7 @@ export interface Blog {
   };
   image: number | Media;
   date: string;
-  category: "Web Design" | "Web Development" | "SEO" | "Marketing" | "Other";
+  category: 'Web Design' | 'Web Development' | 'SEO' | 'Marketing' | 'Other';
   tags: {
     tag?: string | null;
     id?: string | null;
@@ -203,7 +197,7 @@ export interface Blog {
       }[]
     | null;
   slug: string;
-  status: "draft" | "published";
+  status: 'draft' | 'published';
   author: number | Author;
   readTime?: number | null;
   meta?: {
@@ -216,7 +210,7 @@ export interface Blog {
   };
   updatedAt: string;
   createdAt: string;
-  _status?: ("draft" | "published") | null;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -273,7 +267,7 @@ export interface CaseStudy {
     buttonLink: string;
   };
   statistics: {
-    icon: "search" | "star" | "calendar" | "clock";
+    icon: 'search' | 'star' | 'calendar' | 'clock';
     /**
      * Wert der Statistik (z.B. "100" oder "100%")
      */
@@ -293,8 +287,8 @@ export interface CaseStudy {
           version: number;
           [k: string]: unknown;
         }[];
-        direction: ("ltr" | "rtl") | null;
-        format: "left" | "start" | "center" | "right" | "end" | "justify" | "";
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
         indent: number;
         version: number;
       };
@@ -373,7 +367,7 @@ export interface CaseStudy {
     metrics?:
       | {
           category: string;
-          icon: "trendingUp" | "lineChart" | "users";
+          icon: 'trendingUp' | 'lineChart' | 'users';
           /**
            * Add vorher/nachher Statistiken für diese Kategorie
            */
@@ -407,8 +401,8 @@ export interface CaseStudy {
           version: number;
           [k: string]: unknown;
         }[];
-        direction: ("ltr" | "rtl") | null;
-        format: "left" | "start" | "center" | "right" | "end" | "justify" | "";
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
         indent: number;
         version: number;
       };
@@ -417,7 +411,7 @@ export interface CaseStudy {
   };
   updatedAt: string;
   createdAt: string;
-  _status?: ("draft" | "published") | null;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -431,37 +425,35 @@ export interface ContactForm {
   companyName?: string | null;
   industry?:
     | (
-        | "restaurants"
-        | "medical"
-        | "legal"
-        | "trades"
-        | "realestate"
-        | "consulting"
-        | "fitness"
-        | "education"
-        | "events"
-        | "other"
+        | 'restaurants'
+        | 'medical'
+        | 'legal'
+        | 'trades'
+        | 'realestate'
+        | 'consulting'
+        | 'fitness'
+        | 'education'
+        | 'events'
+        | 'other'
       )
     | null;
-  businessSize?: ("1-10" | "11-50" | "51-200" | "201+") | null;
-  hasWebsite: "yes" | "no";
+  businessSize?: ('1-10' | '11-50' | '51-200' | '201+') | null;
+  hasWebsite: 'yes' | 'no';
   websiteUrl?: string | null;
-  currentMarketing?:
-    | ("analytics" | "ads" | "social" | "email" | "seo" | "none")[]
-    | null;
+  currentMarketing?: ('analytics' | 'ads' | 'social' | 'email' | 'seo' | 'none')[] | null;
   projectType: (
-    | "web-design"
-    | "web-development"
-    | "seo-optimization"
-    | "online-marketing"
-    | "content-creation"
-    | "consulting"
+    | 'web-design'
+    | 'web-development'
+    | 'seo-optimization'
+    | 'online-marketing'
+    | 'content-creation'
+    | 'consulting'
   )[];
-  timeline: "immediately" | "1-month" | "3-months" | "6-months" | "exploring";
-  budget: "under-2k" | "2k-5k" | "5k-10k" | "10k-20k" | "over-20k" | "not-sure";
+  timeline: 'immediately' | '1-month' | '3-months' | '6-months' | 'exploring';
+  budget: 'under-2k' | '2k-5k' | '5k-10k' | '10k-20k' | 'over-20k' | 'not-sure';
   message?: string | null;
-  howDidYouHear?: ("search" | "social" | "referral" | "blog" | "other") | null;
-  status: "new" | "in-progress" | "contacted" | "closed";
+  howDidYouHear?: ('search' | 'social' | 'referral' | 'blog' | 'other') | null;
+  status: 'new' | 'in-progress' | 'contacted' | 'closed';
   notes?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -501,36 +493,36 @@ export interface PayloadLockedDocument {
   id: number;
   document?:
     | ({
-        relationTo: "media";
+        relationTo: 'media';
         value: number | Media;
       } | null)
     | ({
-        relationTo: "blog";
+        relationTo: 'blog';
         value: number | Blog;
       } | null)
     | ({
-        relationTo: "author";
+        relationTo: 'author';
         value: number | Author;
       } | null)
     | ({
-        relationTo: "case-studies";
+        relationTo: 'case-studies';
         value: number | CaseStudy;
       } | null)
     | ({
-        relationTo: "contact-forms";
+        relationTo: 'contact-forms';
         value: number | ContactForm;
       } | null)
     | ({
-        relationTo: "projekte";
+        relationTo: 'projekte';
         value: string | Projekte;
       } | null)
     | ({
-        relationTo: "users";
+        relationTo: 'users';
         value: number | User;
       } | null);
   globalSlug?: string | null;
   user: {
-    relationTo: "users";
+    relationTo: 'users';
     value: number | User;
   };
   updatedAt: string;
@@ -543,7 +535,7 @@ export interface PayloadLockedDocument {
 export interface PayloadPreference {
   id: number;
   user: {
-    relationTo: "users";
+    relationTo: 'users';
     value: number | User;
   };
   key?: string | null;
@@ -914,14 +906,14 @@ export interface Impressum {
         version: number;
         [k: string]: unknown;
       }[];
-      direction: ("ltr" | "rtl") | null;
-      format: "left" | "start" | "center" | "right" | "end" | "justify" | "";
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
       indent: number;
       version: number;
     };
     [k: string]: unknown;
   };
-  _status?: ("draft" | "published") | null;
+  _status?: ('draft' | 'published') | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -950,14 +942,14 @@ export interface Datenschutz {
         version: number;
         [k: string]: unknown;
       }[];
-      direction: ("ltr" | "rtl") | null;
-      format: "left" | "start" | "center" | "right" | "end" | "justify" | "";
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
       indent: number;
       version: number;
     };
     [k: string]: unknown;
   };
-  _status?: ("draft" | "published") | null;
+  _status?: ('draft' | 'published') | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -987,15 +979,8 @@ export interface Faq {
               version: number;
               [k: string]: unknown;
             }[];
-            direction: ("ltr" | "rtl") | null;
-            format:
-              | "left"
-              | "start"
-              | "center"
-              | "right"
-              | "end"
-              | "justify"
-              | "";
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
             indent: number;
             version: number;
           };
@@ -1004,7 +989,7 @@ export interface Faq {
         id?: string | null;
       }[]
     | null;
-  _status?: ("draft" | "published") | null;
+  _status?: ('draft' | 'published') | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1059,6 +1044,7 @@ export interface Auth {
   [k: string]: unknown;
 }
 
-declare module "payload" {
+
+declare module 'payload' {
   export interface GeneratedTypes extends Config {}
 }

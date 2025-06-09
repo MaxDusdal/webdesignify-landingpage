@@ -532,6 +532,11 @@ export default function ContactForm({ onSubmitSuccess }: ContactFormProps) {
                 </Select>
               )}
             />
+            {errors.howDidYouHear && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.howDidYouHear.message}
+              </p>
+            )}
           </div>
         </div>
       ),

@@ -40,7 +40,10 @@ export default buildConfig({
   // you don't need it!
 
   sharp,
-  serverURL: process.env.NEXT_PUBLIC_VERCEL_URL || "http://localhost:3000",
+  serverURL:
+    process.env.NODE_ENV === "production"
+      ? `https://${process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL}`
+      : "http://localhost:3000",
   telemetry: false,
 
   plugins: [

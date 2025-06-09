@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
             message: `New form submission from ${validatedData.name} (${validatedData.email})`,
             title: "New Contact Form Submission on webdesignify.de",
             priority: 3,
-            click: `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/admin/collections/contact-forms/${submission.id}`,
+            click: `https://${process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL}/admin/collections/contact-forms/${submission.id}`,
           }),
         });
       } catch (ntfyError) {

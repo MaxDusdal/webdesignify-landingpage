@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         hostname: "localhost",
+        protocol: "http",
       },
       {
         hostname: "webdesignify.de",
