@@ -9,7 +9,7 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 ">
+    <header className=" w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 ">
       <div className="container flex h-16 items-center justify-between mx-auto max-w-7xl px-4 md:px-6">
         <Link href="/" className="flex items-center gap-2">
           <Logo />
@@ -17,28 +17,22 @@ export default function Navbar() {
 
         <nav className="hidden md:flex items-center gap-6">
           <Link
-            href="#services"
+            href="/#services"
             className="text-muted-foreground hover:text-foreground transition-colors"
           >
             Services
           </Link>
           <Link
-            href="#work"
+            href="/projekte"
             className="text-muted-foreground hover:text-foreground transition-colors"
           >
-            Work
+            Projekte
           </Link>
           <Link
-            href="#process"
+            href="/blog"
             className="text-muted-foreground hover:text-foreground transition-colors"
           >
-            Process
-          </Link>
-          <Link
-            href="#about"
-            className="text-muted-foreground hover:text-foreground transition-colors"
-          >
-            About
+            Blog
           </Link>
           <Button variant="default" asChild>
             <Link href="/kontakt">Kontakt aufnehmen</Link>

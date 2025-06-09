@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default async function ProjectsPage() {
   return (
-    <main className="py-8 md:py-12">
+    <main>
       <Projects />
     </main>
   );

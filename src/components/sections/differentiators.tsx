@@ -59,6 +59,7 @@ export default function Differentiators() {
         >
           <HeaderSection
             headerType="h2"
+            animate={false}
             title="Warum mit mir arbeiten?"
             description="Eine strategisch entwickelte Webseite, die Ihre Unternehmensziele aktiv unterstützt"
             variant="secondary"

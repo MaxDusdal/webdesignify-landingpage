@@ -27,6 +27,7 @@ export default async function Projects() {
     <div className="container px-4 md:px-6 mx-auto py-12 md:py-16 max-w-7xl">
       <HeaderSection
         headerType="h2"
+        animate={false}
         title="Meine Projekte"
         description="Entdecken Sie meine bisherigen Projekte und Leistungen"
       />

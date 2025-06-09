@@ -123,9 +123,11 @@ export default function WebDesign() {
             {
               text: "Kontakt aufnehmen",
               withArrow: true,
+              href: "/kontakt"
             },
             {
               text: "Referenzen ansehen",
+              href: "/projekte",
               variant: "link",
             },
           ]}

@@ -4,6 +4,7 @@ import { LucideIcon, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 interface ButtonProps {
   text: string;
@@ -11,6 +12,7 @@ interface ButtonProps {
   variant?: "default" | "link";
   icon?: LucideIcon;
   onClick?: () => void;
+  href?: string;
 }
 
 interface HeaderSectionProps {
@@ -120,7 +122,7 @@ export default function HeaderSection({
               custom={4}
             >
               {buttons.map((button, index) => {
-                return (
+                const ButtonComponent = (
                   <Button
                     key={index}
                     size="lg"
@@ -136,6 +138,14 @@ export default function HeaderSection({
                       <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                     )}
                   </Button>
+                );
+
+                return button.href ? (
+                  <Link key={index} href={button.href}>
+                    {ButtonComponent}
+                  </Link>
+                ) : (
+                  ButtonComponent
                 );
               })}
             </motion.div>
