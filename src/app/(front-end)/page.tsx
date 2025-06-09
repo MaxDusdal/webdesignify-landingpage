@@ -3,7 +3,6 @@ import FAQSection from '@/components/sections/faq-section';
 import { Metadata } from 'next';
 import Projects from '@/components/sections/projects';
 import Hero from '@/components/sections/hero';
-import Differentiators from '@/components/sections/differentiators';
 import Services from '@/components/sections/services';
 
 export const metadata: Metadata = {
@@ -16,7 +15,6 @@ export default function Home() {
         <>
             <Hero />
             <Services />
-            <Differentiators />
             <Projects />
             <FAQSection />
             <Blog />
