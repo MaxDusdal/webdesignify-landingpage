@@ -1,7 +1,19 @@
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Code, Layout, Zap } from 'lucide-react';
-import { MyLottieComponentDynamic } from '../hero-lottie';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
+
+// Dynamically import the Lottie component with SSR disabled
+const MyLottieComponentDynamic = dynamic(
+    () => import('../hero-lottie').then((mod) => ({ default: mod.MyLottieComponentDynamic })),
+    { 
+        ssr: false,
+        loading: () => <div className="h-[400px] w-full flex items-center justify-center">
+            <div className="animate-pulse bg-accent/20 rounded-lg h-full w-full"></div>
+        </div>
+    }
+);
+
 export default function Hero() {
     return (
         <section className='relative overflow-hidden py-8 md:py-16 lg:py-32 bg-secondary text-secondary-foreground'>

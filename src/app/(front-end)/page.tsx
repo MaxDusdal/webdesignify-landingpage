@@ -5,6 +5,7 @@ import Projects from '@/components/sections/projects';
 import Differentiators from '@/components/sections/differentiators';
 import SocialProof from '@/components/sections/social-proof';
 import Services from '@/components/sections/services';
+import Hero from '@/components/sections/hero';
 
 export const metadata: Metadata = {
     title: 'Online-Marketing und Web-Apps aus Mannheim - Webdesignify',
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
 export default function Home() {
     return (
         <>
+            <Hero />
             <SocialProof />
             <Services />
             <Differentiators />
