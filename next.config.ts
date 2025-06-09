@@ -1,5 +1,5 @@
-import type { NextConfig } from 'next';
-import { withPayload } from '@payloadcms/next/withPayload';
+import type { NextConfig } from "next";
+import { withPayload } from "@payloadcms/next/withPayload";
 
 const nextConfig: NextConfig = {
   /* config options here */
@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
       },
       {
         hostname: "webdesignify.de",
-      }
+      },
     ],
   },
   async rewrites() {

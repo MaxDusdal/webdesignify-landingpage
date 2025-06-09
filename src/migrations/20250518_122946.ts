@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-postgres'
+import { MigrateUpArgs, MigrateDownArgs, sql } from "@payloadcms/db-postgres";
 
 export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   await db.execute(sql`
@@ -1065,10 +1065,14 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX IF NOT EXISTS "_faq_v_created_at_idx" ON "_faq_v" USING btree ("created_at");
   CREATE INDEX IF NOT EXISTS "_faq_v_updated_at_idx" ON "_faq_v" USING btree ("updated_at");
   CREATE INDEX IF NOT EXISTS "_faq_v_latest_idx" ON "_faq_v" USING btree ("latest");
-  CREATE INDEX IF NOT EXISTS "_faq_v_autosave_idx" ON "_faq_v" USING btree ("autosave");`)
+  CREATE INDEX IF NOT EXISTS "_faq_v_autosave_idx" ON "_faq_v" USING btree ("autosave");`);
 }
 
-export async function down({ db, payload, req }: MigrateDownArgs): Promise<void> {
+export async function down({
+  db,
+  payload,
+  req,
+}: MigrateDownArgs): Promise<void> {
   await db.execute(sql`
    DROP TABLE "media" CASCADE;
   DROP TABLE "blog_tags" CASCADE;
@@ -1142,5 +1146,5 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   DROP TYPE "public"."enum_datenschutz_status";
   DROP TYPE "public"."enum__datenschutz_v_version_status";
   DROP TYPE "public"."enum_faq_status";
-  DROP TYPE "public"."enum__faq_v_version_status";`)
+  DROP TYPE "public"."enum__faq_v_version_status";`);
 }

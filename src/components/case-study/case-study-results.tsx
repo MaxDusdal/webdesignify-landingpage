@@ -1,13 +1,17 @@
-"use client"
+"use client";
 
-import { useRef } from "react"
-import { motion, useInView } from "framer-motion"
-import { TrendingUp, LineChart, Users } from "lucide-react"
-import { CaseStudy } from "../../../payload-types"
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { TrendingUp, LineChart, Users } from "lucide-react";
+import { CaseStudy } from "../../../payload-types";
 
-export default function CaseStudyResults({ caseStudy }: { caseStudy: CaseStudy }) {
-  const resultsRef = useRef<HTMLDivElement>(null)
-  const isInView = useInView(resultsRef, { once: true, amount: 0.2 })
+export default function CaseStudyResults({
+  caseStudy,
+}: {
+  caseStudy: CaseStudy;
+}) {
+  const resultsRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(resultsRef, { once: true, amount: 0.2 });
 
   const metrics = [
     {
@@ -82,10 +86,13 @@ export default function CaseStudyResults({ caseStudy }: { caseStudy: CaseStudy }
         },
       ],
     },
-  ]
+  ];
 
   return (
-    <section ref={resultsRef} className="w-full py-16 md:py-24 bg-secondary text-secondary-foreground">
+    <section
+      ref={resultsRef}
+      className="w-full py-16 md:py-24 bg-secondary text-secondary-foreground"
+    >
       <div className="container px-4 md:px-6 mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0 }}
@@ -93,16 +100,18 @@ export default function CaseStudyResults({ caseStudy }: { caseStudy: CaseStudy }
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl font-bold tracking-tighter md:text-4xl">Ergebnisse</h2>
+          <h2 className="text-3xl font-bold tracking-tighter md:text-4xl">
+            Ergebnisse
+          </h2>
           <p className="mt-4 text-lg text-primary-foreground/80 max-w-2xl mx-auto">
             {caseStudy.results?.description ||
-                'Die digitale Transformation führte zu messbaren Verbesserungen in allen Geschäftsbereichen des Restaurants Bergblick.'}
+              "Die digitale Transformation führte zu messbaren Verbesserungen in allen Geschäftsbereichen des Restaurants Bergblick."}
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {metrics.map((metric, index) => {
-            const Icon = metric.icon
+            const Icon = metric.icon;
 
             return (
               <motion.div
@@ -121,20 +130,29 @@ export default function CaseStudyResults({ caseStudy }: { caseStudy: CaseStudy }
 
                 <div className="space-y-6">
                   {metric.stats.map((stat, statIndex) => (
-                    <div key={statIndex} className="border-b border-primary-foreground/20 pb-4 last:border-0">
-                      <div className="text-sm text-primary-foreground/70 mb-2">{stat.label}</div>
+                    <div
+                      key={statIndex}
+                      className="border-b border-primary-foreground/20 pb-4 last:border-0"
+                    >
+                      <div className="text-sm text-primary-foreground/70 mb-2">
+                        {stat.label}
+                      </div>
                       <div className="flex justify-between items-baseline mb-1">
                         <div className="text-sm opacity-80">
-                          <span className="text-xs uppercase">Vorher:</span> {stat.before}
+                          <span className="text-xs uppercase">Vorher:</span>{" "}
+                          {stat.before}
                         </div>
                         <div className="text-sm font-medium">
-                          <span className="text-xs uppercase">Nachher:</span> {stat.after}
+                          <span className="text-xs uppercase">Nachher:</span>{" "}
+                          {stat.after}
                         </div>
                       </div>
                       <div className="flex justify-end items-center">
                         <span
                           className={`text-sm font-bold ${
-                            stat.improvement.startsWith("+") ? "text-green-400" : "text-accent"
+                            stat.improvement.startsWith("+")
+                              ? "text-green-400"
+                              : "text-accent"
                           }`}
                         >
                           {stat.improvement}
@@ -144,10 +162,10 @@ export default function CaseStudyResults({ caseStudy }: { caseStudy: CaseStudy }
                   ))}
                 </div>
               </motion.div>
-            )
+            );
           })}
         </div>
       </div>
     </section>
-  )
+  );
 }
