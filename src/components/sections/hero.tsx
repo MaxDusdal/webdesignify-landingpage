@@ -1,3 +1,5 @@
+'use client';
+
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Code, Layout, Zap } from 'lucide-react';
 import dynamic from 'next/dynamic';
