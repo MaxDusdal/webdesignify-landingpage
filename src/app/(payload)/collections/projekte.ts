@@ -1,4 +1,5 @@
 import { CollectionConfig } from 'payload';
+import { revalidatePath } from 'next/cache';
 
 export const Projekte: CollectionConfig = {
     slug: 'projekte',
@@ -66,6 +67,22 @@ export const Projekte: CollectionConfig = {
             label: 'URL',
         },
     ],
+    hooks: {
+        afterChange: [
+            ({ operation }) => {
+                if (process.env.NODE_ENV === 'production') {
+                    try {
+                        revalidatePath('/');
+                        revalidatePath('/projekte');
+                        
+                        console.log(`Revalidated paths after ${operation} operation on projekte collection`);
+                    } catch (error) {
+                        console.error('Failed to revalidate after projekte change:', error);
+                    }
+                }
+            },
+        ],
+    },
     admin: {
         useAsTitle: 'title',
     },
