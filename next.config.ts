@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
         protocol: "http",
       },
       {
-        hostname: "webdesignify.de",
+        hostname: "www.webdesignify.de",
         protocol: "https",
       },
     ],
