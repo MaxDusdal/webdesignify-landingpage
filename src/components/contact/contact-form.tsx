@@ -512,7 +512,7 @@ export default function ContactForm({ onSubmitSuccess }: ContactFormProps) {
           </div>
           <div>
             <Label htmlFor="howDidYouHear" className="mb-2 block">
-              Wie haben Sie von uns erfahren?
+              Wie haben Sie von uns erfahren? *
             </Label>
             <Controller
               name="howDidYouHear"
