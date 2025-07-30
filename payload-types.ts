@@ -70,7 +70,6 @@ export interface Config {
     media: Media;
     blog: Blog;
     author: Author;
-    'case-studies': CaseStudy;
     'contact-forms': ContactForm;
     projekte: Projekte;
     users: User;
@@ -83,7 +82,6 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     blog: BlogSelect<false> | BlogSelect<true>;
     author: AuthorSelect<false> | AuthorSelect<true>;
-    'case-studies': CaseStudiesSelect<false> | CaseStudiesSelect<true>;
     'contact-forms': ContactFormsSelect<false> | ContactFormsSelect<true>;
     projekte: ProjekteSelect<false> | ProjekteSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
@@ -251,170 +249,6 @@ export interface User {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "case-studies".
- */
-export interface CaseStudy {
-  id: number;
-  /**
-   * Der Slug wird verwendet, um die URL des Projekts zu generieren. (z.B. "restaurant-bergblick" in der URL https://webdesignify.de/projekte/restaurant-bergblick)
-   */
-  slug: string;
-  title: string;
-  description: string;
-  heroImage: number | Media;
-  heroCTA: {
-    buttonText?: string | null;
-    buttonLink: string;
-  };
-  statistics: {
-    icon: 'search' | 'star' | 'calendar' | 'clock';
-    /**
-     * Wert der Statistik (z.B. "100" oder "100%")
-     */
-    value: string;
-    /**
-     * Label der Statistik (z.B. "Verbesserung der Suchleistung")
-     */
-    label: string;
-    id?: string | null;
-  }[];
-  projectSummary?: {
-    content?: {
-      root: {
-        type: string;
-        children: {
-          type: string;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    } | null;
-    timelineItems?:
-      | {
-          text: string;
-          id?: string | null;
-        }[]
-      | null;
-    serviceItems?:
-      | {
-          text: string;
-          id?: string | null;
-        }[]
-      | null;
-  };
-  challenge?: {
-    description?: string | null;
-    challenges?:
-      | {
-          text: string;
-          id?: string | null;
-        }[]
-      | null;
-    summary?: string | null;
-    imageGroup?: {
-      image?: (number | null) | Media;
-      imageDescription?: string | null;
-    };
-  };
-  solution?: {
-    description?: string | null;
-    points?:
-      | {
-          text: string;
-          id?: string | null;
-        }[]
-      | null;
-    /**
-     * Füge 1 bis 3 Tabs hinzu, um verschiedene Aspekte der Lösung zu zeigen
-     */
-    tabs?:
-      | {
-          title: string;
-          /**
-           * Eindeutige Kennung für diesen Tab (z.B. "website", "system", "results")
-           */
-          value: string;
-          image: number | Media;
-          description?: string | null;
-          id?: string | null;
-        }[]
-      | null;
-  };
-  inHouseSoftware?: {
-    title?: string | null;
-    description?: string | null;
-    points?:
-      | {
-          text: string;
-          id?: string | null;
-        }[]
-      | null;
-    cta?: {
-      text?: string | null;
-      link?: string | null;
-    };
-  };
-  results?: {
-    description?: string | null;
-    /**
-     * Add Kategorien zu Ergebnissen anzeigen
-     */
-    metrics?:
-      | {
-          category: string;
-          icon: 'trendingUp' | 'lineChart' | 'users';
-          /**
-           * Add vorher/nachher Statistiken für diese Kategorie
-           */
-          statistics?:
-            | {
-                label: string;
-                before: string;
-                after: string;
-                improvement: string;
-                id?: string | null;
-              }[]
-            | null;
-          id?: string | null;
-        }[]
-      | null;
-  };
-  testimonial: {
-    quote: string;
-    author: {
-      name: string;
-      title: string;
-      image?: (number | null) | Media;
-    };
-  };
-  conclusion: {
-    content: {
-      root: {
-        type: string;
-        children: {
-          type: string;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    };
-  };
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "contact-forms".
  */
 export interface ContactForm {
@@ -478,9 +312,9 @@ export interface Projekte {
       }[]
     | null;
   /**
-   * Select the case study this project should redirect to
+   * Date when the project was completed or published. Used for sorting projects chronologically.
    */
-  caseStudy?: (number | null) | CaseStudy;
+  projectDate?: string | null;
   url: string;
   updatedAt: string;
   createdAt: string;
@@ -503,10 +337,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'author';
         value: number | Author;
-      } | null)
-    | ({
-        relationTo: 'case-studies';
-        value: number | CaseStudy;
       } | null)
     | ({
         relationTo: 'contact-forms';
@@ -653,144 +483,6 @@ export interface AuthorSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "case-studies_select".
- */
-export interface CaseStudiesSelect<T extends boolean = true> {
-  slug?: T;
-  title?: T;
-  description?: T;
-  heroImage?: T;
-  heroCTA?:
-    | T
-    | {
-        buttonText?: T;
-        buttonLink?: T;
-      };
-  statistics?:
-    | T
-    | {
-        icon?: T;
-        value?: T;
-        label?: T;
-        id?: T;
-      };
-  projectSummary?:
-    | T
-    | {
-        content?: T;
-        timelineItems?:
-          | T
-          | {
-              text?: T;
-              id?: T;
-            };
-        serviceItems?:
-          | T
-          | {
-              text?: T;
-              id?: T;
-            };
-      };
-  challenge?:
-    | T
-    | {
-        description?: T;
-        challenges?:
-          | T
-          | {
-              text?: T;
-              id?: T;
-            };
-        summary?: T;
-        imageGroup?:
-          | T
-          | {
-              image?: T;
-              imageDescription?: T;
-            };
-      };
-  solution?:
-    | T
-    | {
-        description?: T;
-        points?:
-          | T
-          | {
-              text?: T;
-              id?: T;
-            };
-        tabs?:
-          | T
-          | {
-              title?: T;
-              value?: T;
-              image?: T;
-              description?: T;
-              id?: T;
-            };
-      };
-  inHouseSoftware?:
-    | T
-    | {
-        title?: T;
-        description?: T;
-        points?:
-          | T
-          | {
-              text?: T;
-              id?: T;
-            };
-        cta?:
-          | T
-          | {
-              text?: T;
-              link?: T;
-            };
-      };
-  results?:
-    | T
-    | {
-        description?: T;
-        metrics?:
-          | T
-          | {
-              category?: T;
-              icon?: T;
-              statistics?:
-                | T
-                | {
-                    label?: T;
-                    before?: T;
-                    after?: T;
-                    improvement?: T;
-                    id?: T;
-                  };
-              id?: T;
-            };
-      };
-  testimonial?:
-    | T
-    | {
-        quote?: T;
-        author?:
-          | T
-          | {
-              name?: T;
-              title?: T;
-              image?: T;
-            };
-      };
-  conclusion?:
-    | T
-    | {
-        content?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "contact-forms_select".
  */
 export interface ContactFormsSelect<T extends boolean = true> {
@@ -829,7 +521,7 @@ export interface ProjekteSelect<T extends boolean = true> {
         tag?: T;
         id?: T;
       };
-  caseStudy?: T;
+  projectDate?: T;
   url?: T;
   updatedAt?: T;
   createdAt?: T;

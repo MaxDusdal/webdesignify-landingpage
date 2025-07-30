@@ -1,103 +1,200 @@
 "use client";
 
-import { useRef } from "react";
-import Image from "next/image";
-import { motion, useInView } from "framer-motion";
-import { ArrowRight, Calendar, Star, Search, Clock } from "lucide-react";
-import Link from "next/link";
+import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { CaseStudy, Media } from "../../../payload-types";
+import { ExternalLink, Calendar, Globe } from "lucide-react";
+import Image from "next/image";
 
-// Map string icon names to Lucide components
-const iconMap = {
-  search: Search,
-  star: Star,
-  calendar: Calendar,
-  clock: Clock,
-};
+interface CaseStudyHeroProps {
+  clientName: string;
+  clientLogo: string;
+  industry: string;
+  location: string;
+  projectType: string[];
+  timeframe: string;
+  description: string;
+  websiteUrl?: string;
+  children: React.ReactNode;
+}
 
-export default function CaseStudyHero({ caseStudy }: { caseStudy: CaseStudy }) {
-  const statsRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(statsRef, { once: true, amount: 0.3 });
-  const heroImage = caseStudy.heroImage as Media;
+interface SectionProps {
+  title: string;
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+}
+
+const Section = ({ title, children, className, delay = 0 }: SectionProps) => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6, delay }}
+    className={`space-y-3 lg:space-y-4 ${className}`}
+  >
+    <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide hidden lg:block">{title}</h3>
+    {children}
+  </motion.div>
+);
+
+export default function CaseStudyHero({
+  clientName,
+  clientLogo,
+  industry,
+  location,
+  projectType,
+  timeframe,
+  description,
+  websiteUrl,
+  children,
+}: CaseStudyHeroProps) {
+  const navigationItems = [
+    "Projektübersicht",
+    "Probleme & Lösungen", 
+    "Funktionalitäten",
+    "Projektergebnisse"
+  ];
+
+  const scrollToSection = (sectionName: string) => {
+    const element = document.getElementById(sectionName.toLowerCase().replace(/\s+/g, '-').replace('&', 'und'));
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
-    <section className="relative w-full ">
-      {/* Hero Background */}
-      <div className="relative w-full h-[70vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh]">
-        {heroImage && (
-          <Image
-            src={heroImage.url || "placeholder.svg?height=1080&width=1920"}
-            alt={heroImage.alt || "placeholder"}
-            fill
-            className="object-cover brightness-[0.6]"
-            priority
-          />
-        )}
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/40 via-primary/30 to-primary/80"></div>
-      </div>
-
-      {/* Hero Content Overlay */}
-      <div className="absolute inset-0 flex items-center mx-auto max-w-7xl">
-        <div className="container px-4 md:px-6">
-          <div className="max-w-3xl">
-            <Badge
-              variant="outline"
-              className="bg-primary/20 text-primary-foreground mb-4 backdrop-blur-sm text-sm"
+    <div className="container mx-auto px-4 max-w-7xl py-4 md:py-8">
+      <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
+        {/* Sidebar - Stacked on mobile, sidebar on desktop */}
+        <div className="w-full lg:w-1/5 lg:min-w-[280px]">
+          <div className="lg:sticky lg:top-8 space-y-4 lg:space-y-6">
+            {/* Client Logo & Name */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-center lg:text-left pb-4 lg:pb-6 border-b border-border items-center"
             >
-              FALLSTUDIE
-            </Badge>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-4 drop-shadow-md">
-              {caseStudy.title}
-            </h1>
-            <p className="text-xl md:text-2xl text-primary-foreground/90 mb-6 max-w-2xl">
-              {caseStudy.description}
-            </p>
-            <Button className="group" size="lg">
-              <Link href={caseStudy.heroCTA.buttonLink} target="_blank">
-                {caseStudy.heroCTA.buttonText}
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Link>
-            </Button>
+              <div className="flex items-center justify-center lg:justify-start gap-4 mb-2 lg:mb-3">
+                <div className="w-12 h-12 lg:w-16 lg:h-16 relative flex-shrink-0">
+                  <Image
+                    src={clientLogo}
+                    alt={`${clientName} Logo`}
+                    fill
+                    className="object-contain rounded-lg"
+                  />
+                </div>
+                <div className="text-left">
+                  <h1 className="text-lg lg:text-xl font-bold">{clientName}</h1>
+                  <p className="text-sm text-muted-foreground">{industry}</p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Description - Hidden on mobile to save space */}
+            <Section title="" delay={0.1} className="hidden lg:block">
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                {description}
+              </p>
+            </Section>
+
+            {/* Navigation Bullets */}
+            <Section title="Inhalt" delay={0.2} className="pb-4 lg:pb-6 border-b border-border">
+              {/* Mobile: Horizontal scroll navigation */}
+              <div className="flex gap-2 overflow-x-auto pb-2 lg:hidden">
+                {navigationItems.map((item, index) => (
+                  <button
+                    key={index}
+                    onClick={() => scrollToSection(item)}
+                    className="flex-shrink-0 px-3 py-2 text-xs font-medium bg-muted/50 hover:bg-muted rounded-md transition-colors whitespace-nowrap"
+                  >
+                    {item}
+                  </button>
+                ))}
+              </div>
+              {/* Desktop: Vertical navigation */}
+              <div className="hidden lg:block space-y-2">
+                {navigationItems.map((item, index) => (
+                  <button
+                    key={index}
+                    onClick={() => scrollToSection(item)}
+                    className="w-full text-left py-2 px-3 rounded-md hover:bg-muted transition-colors group"
+                  >
+                    <div className="flex items-center gap-3 cursor-pointer">
+                      <span className="text-2xl font-bold text-muted-foreground/30 w-8 group-hover:text-secondary">{index + 1}</span>
+                      <span className="text-sm group-hover:text-secondary text-muted-foreground">{item}</span>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </Section>
+
+            {/* Meta Information */}
+            <Section title="Details" delay={0.3}>
+              {/* Mobile: Compact horizontal layout */}
+              <div className="grid grid-cols-2 gap-4 lg:hidden">
+                <div>
+                  <p className="text-xs text-muted-foreground">Standort</p>
+                  <p className="text-sm font-medium">{location}</p>
+                </div>
+                <div>
+                  <p className="text-xs text-muted-foreground">Zeitraum</p>
+                  <p className="text-sm font-medium">{timeframe}</p>
+                </div>
+              </div>
+
+              {/* Desktop: Vertical layout with icons */}
+              <div className="hidden lg:block space-y-4">
+                {/* Location */}
+                <div className="flex items-start gap-3">
+                  <Globe className="w-4 h-4 text-muted-foreground mt-0.5" />
+                  <div>
+                    <p className="text-xs text-muted-foreground">Standort</p>
+                    <p className="text-sm">{location}</p>
+                  </div>
+                </div>
+
+                {/* Timeframe */}
+                <div className="flex items-start gap-3">
+                  <Calendar className="w-4 h-4 text-muted-foreground mt-0.5" />
+                  <div>
+                    <p className="text-xs text-muted-foreground">Zeitraum</p>
+                    <p className="text-sm">{timeframe}</p>
+                  </div>
+                </div>
+              </div>
+              {/* Project Types */}
+              <Section title="Services">
+                <div className="flex flex-wrap gap-1">
+                  {projectType.map((type, index) => (
+                    <Badge key={index} variant="secondary" className="text-xs bg-secondary/10 text-secondary">
+                      {type}
+                    </Badge>
+                  ))}
+                </div>
+              </Section>
+
+              {/* Website Link */}
+              {websiteUrl && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="w-full mt-3 lg:mt-4"
+                  onClick={() => window.open(websiteUrl, '_blank')}
+                >
+                  <ExternalLink className="w-4 h-4 mr-2" />
+                  Website besuchen
+                </Button>
+              )}
+            </Section>
           </div>
         </div>
-      </div>
 
-      {/* Stats Bar */}
-      <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 w-full max-w-4xl">
-        <div
-          ref={statsRef}
-          className={`mx-4 grid gap-4 bg-card rounded-lg border border-border/40 shadow-lg p-8`}
-          style={{
-            gridTemplateColumns: `repeat(${caseStudy.statistics.length}, minmax(0, 1fr))`,
-          }}
-        >
-          {caseStudy.statistics.map((item, index) => {
-            const IconComponent = iconMap[item.icon];
-
-            return (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="flex flex-col items-center text-center"
-              >
-                <div className="rounded-full bg-secondary/10 p-3 mb-3">
-                  <IconComponent className="h-6 w-6 text-secondary" />
-                </div>
-                <div className="text-2xl md:text-3xl font-bold text-primary">
-                  {item.value}
-                </div>
-                <div className="text-xs md:text-sm text-muted-foreground">
-                  {item.label}
-                </div>
-              </motion.div>
-            );
-          })}
+        {/* Content Area - Full width on mobile, 4/5 on desktop */}
+        <div className="w-full lg:w-4/5">
+          {children}
         </div>
       </div>
-    </section>
+    </div>
   );
 }

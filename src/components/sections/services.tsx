@@ -78,7 +78,7 @@ export default function Services() {
                     {service.description}
                   </p>
 
-                  <div className="mt-4 text-sm font-medium text-secondary opacity-0 group-hover:opacity-100 transition-all flex items-center translate-y-6 group-hover:translate-y-0  duration-200 ease-out ">
+                  <div className="mt-4 text-sm font-medium text-secondary flex items-center justify-between ">
                     {service.link
                       ? "Jetzt Beratung vereinbaren"
                       : "Mehr erfahren"}

@@ -12,7 +12,6 @@ import { Impressum } from "./(payload)/globals/impressum";
 import { Datenschutz } from "./(payload)/globals/datenschutz";
 import { seoPlugin } from "@payloadcms/plugin-seo";
 import { FAQ } from "@/app/(payload)/globals/faq";
-import { CaseStudies } from "@/app/(payload)/collections/case-studies";
 import { ContactForm } from "./(payload)/collections/contact-form";
 import { Projekte } from "./(payload)/collections/projekte";
 export default buildConfig({
@@ -20,18 +19,18 @@ export default buildConfig({
   editor: lexicalEditor(),
 
   // Define and configure your collections in this array
-  collections: [Media, Blog, Author, CaseStudies, ContactForm, Projekte],
+  collections: [Media, Blog, Author, ContactForm, Projekte],
 
   // Define and configure your globals in this array
   globals: [Impressum, Datenschutz, FAQ],
 
   // Your Payload secret - should be a complex and secure string, unguessable
-  secret: process.env.PAYLOAD_SECRET || "",
+  secret: process.env.PAYLOAD_SECRET ?? "", 
   // Whichever Database Adapter you're using should go here
   // Mongoose is shown as an example, but you can also use Postgres
   db: postgresAdapter({
     pool: {
-      connectionString: process.env.DATABASE_URI || "",
+      connectionString: process.env.DATABASE_URI,
     },
   }),
   // If you want to resize images, crop, set focal point, etc.

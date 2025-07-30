@@ -55,7 +55,7 @@ export default async function BlogPost({ params }: BlogPostPageProps) {
       <div className="container px-4 md:px-6 -mt-20 relative z-10 mx-auto">
         <div className="max-w-3xl mx-auto">
           {/* Header Card with Metadata */}
-          <div className="bg-card rounded-lg border border-border/40 shadow-lg p-6 md:p-8 lg:p-10 mb-8">
+          <div className="mb-8">
             <Badge
               variant="secondary"
               className="bg-primary text-primary-foreground mb-4"
