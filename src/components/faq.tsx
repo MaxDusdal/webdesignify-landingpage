@@ -42,18 +42,18 @@ export default function FAQ({ faqItems }: FaqProps) {
           <Collapsible
             open={openIndex === index}
             onOpenChange={() => toggleFAQ(index)}
-            className={`border border-border/40 rounded-lg transition-all duration-300 ${
+            className={`border border-border rounded-lg transition-all duration-300 ${
               openIndex === index
-                ? "bg-card shadow-md scale-[1.01]"
-                : "bg-background hover:bg-muted/50 hover:scale-[1.005]"
+                ? "bg-card shadow-md "
+                : "bg-background hover:bg-muted/50 "
             }`}
           >
             <CollapsibleTrigger asChild>
               <button
                 className={`flex cursor-pointer w-full rounded-md px-6 py-4 text-left bg-white transition-all duration-300 ${
                   openIndex === index
-                    ? "text-primary font-medium"
-                    : "hover:text-primary/80"
+                    ? "text-secondary font-medium"
+                    : "hover:text-secondary"
                 }`}
               >
                 <div className="flex w-full items-start">

@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Calendar, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import type { Blog, Media } from "../../../payload-types";
 
 export default function Blog() {
@@ -19,7 +18,7 @@ export default function Blog() {
     const fetchPosts = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch("/api/blog?limit=2&sort=-date");
+        const response = await fetch("/api/blog?limit=3&sort=-date");
         const data = await response.json();
 
         if (data.docs && Array.isArray(data.docs)) {
@@ -84,7 +83,7 @@ export default function Blog() {
           </Button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {isLoading
             ? // Loading skeleton
               Array.from({ length: 2 }).map((_, index) => (
@@ -121,14 +120,6 @@ export default function Blog() {
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
-                    <div className="absolute top-4 left-4">
-                      <Badge
-                        variant="secondary"
-                        className="bg-primary text-primary-foreground"
-                      >
-                        {post.category}
-                      </Badge>
-                    </div>
                   </div>
 
                   <div className="flex flex-col flex-grow p-6">

@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Calendar, Globe } from "lucide-react";
 import Image from "next/image";
+import { useState, useEffect } from "react";
 
 interface CaseStudyHeroProps {
   clientName: string;
@@ -55,12 +56,48 @@ export default function CaseStudyHero({
     "Projektergebnisse"
   ];
 
+  const [activeSection, setActiveSection] = useState<string>("");
+
   const scrollToSection = (sectionName: string) => {
     const element = document.getElementById(sectionName.toLowerCase().replace(/\s+/g, '-').replace('&', 'und'));
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
+  // Track active section based on scroll position
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Convert element id back to navigation item name
+            const sectionId = entry.target.id;
+            const sectionName = navigationItems.find(item => 
+              item.toLowerCase().replace(/\s+/g, '-').replace('&', 'und') === sectionId
+            );
+            if (sectionName) {
+              setActiveSection(sectionName);
+            }
+          }
+        });
+      },
+      {
+        rootMargin: '-20% 0px -60% 0px', // Trigger when section is in the middle area of viewport
+        threshold: 0.1
+      }
+    );
+
+    // Observe all navigation target sections
+    navigationItems.forEach(item => {
+      const element = document.getElementById(item.toLowerCase().replace(/\s+/g, '-').replace('&', 'und'));
+      if (element) {
+        observer.observe(element);
+      }
+    });
+
+    return () => observer.disconnect();
+  }, [navigationItems]);
 
   return (
     <div className="container mx-auto px-4 max-w-7xl py-4 md:py-8">
@@ -102,30 +139,54 @@ export default function CaseStudyHero({
             <Section title="Inhalt" delay={0.2} className="pb-4 lg:pb-6 border-b border-border">
               {/* Mobile: Horizontal scroll navigation */}
               <div className="flex gap-2 overflow-x-auto pb-2 lg:hidden">
-                {navigationItems.map((item, index) => (
-                  <button
-                    key={index}
-                    onClick={() => scrollToSection(item)}
-                    className="flex-shrink-0 px-3 py-2 text-xs font-medium bg-muted/50 hover:bg-muted rounded-md transition-colors whitespace-nowrap"
-                  >
-                    {item}
-                  </button>
-                ))}
+                {navigationItems.map((item, index) => {
+                  const isActive = activeSection === item;
+                  return (
+                    <button
+                      key={index}
+                      onClick={() => scrollToSection(item)}
+                      className={`flex-shrink-0 px-3 py-2 text-xs font-medium rounded-md transition-colors whitespace-nowrap ${
+                        isActive 
+                          ? 'bg-muted text-secondary-foreground' 
+                          : 'bg-muted/50 hover:bg-muted'
+                      }`}
+                    >
+                      {item}
+                    </button>
+                  );
+                })}
               </div>
               {/* Desktop: Vertical navigation */}
               <div className="hidden lg:block space-y-2">
-                {navigationItems.map((item, index) => (
-                  <button
-                    key={index}
-                    onClick={() => scrollToSection(item)}
-                    className="w-full text-left py-2 px-3 rounded-md hover:bg-muted transition-colors group"
-                  >
-                    <div className="flex items-center gap-3 cursor-pointer">
-                      <span className="text-2xl font-bold text-muted-foreground/30 w-8 group-hover:text-secondary">{index + 1}</span>
-                      <span className="text-sm group-hover:text-secondary text-muted-foreground">{item}</span>
-                    </div>
-                  </button>
-                ))}
+                {navigationItems.map((item, index) => {
+                  const isActive = activeSection === item;
+                  return (
+                    <button
+                      key={index}
+                      onClick={() => scrollToSection(item)}
+                      className={`w-full text-left py-2 px-3 rounded-md transition-colors group ${
+                        isActive ? 'bg-muted border-secondary' : 'hover:bg-muted/50'
+                      }`}
+                    >
+                      <div className="flex items-center gap-3 cursor-pointer">
+                        <span className={`text-2xl font-bold w-8 ${
+                          isActive 
+                            ? 'text-secondary' 
+                            : 'text-muted-foreground/30 group-hover:text-secondary/80'
+                        }`}>
+                          {index + 1}
+                        </span>
+                        <span className={`text-sm ${
+                          isActive 
+                            ? 'text-secondary font-medium' 
+                            : 'text-muted-foreground group-hover:text-secondary'
+                        }`}>
+                          {item}
+                        </span>
+                      </div>
+                    </button>
+                  );
+                })}
               </div>
             </Section>
 

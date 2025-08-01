@@ -38,14 +38,14 @@ export default async function Projects() {
           <Link
             key={project.id}
             href={project.url}
-            className="group flex flex-col overflow-hidden rounded-lg border border-border bg-card transition-all duration-200 hover:shadow-md"
+            className="group flex flex-col overflow-hidden rounded-lg shadow-md border border-border bg-card transition-all duration-200 hover:shadow-lg"
           >
             <div className="relative h-[200px] overflow-hidden">
               <Image
                 src={(project.image as Media).url ?? "/placeholder.svg"}
                 alt={project.title}
                 fill
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                className="object-cover"
               />
               <div className="absolute top-4 left-4 flex gap-2 flex-wrap">
                 {project.tags?.map((tagObj: Tag, i: number) => (
@@ -67,9 +67,7 @@ export default async function Projects() {
               <p className="text-sm text-muted-foreground mb-4">
                 {project.subtitle}
               </p>
-              <p className="text-muted-foreground mb-4 flex-grow">
-                {project.description}
-              </p>
+
 
               <div className="mt-auto pt-4 flex items-center text-secondary justify-between font-medium text-sm">
                 Projekt ansehen

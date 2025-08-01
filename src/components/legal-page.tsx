@@ -48,7 +48,7 @@ export default async function LegalPage({ slug }: LegalPageProps) {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-screen-lg">
+    <div className  ="container mx-auto px-4 py-8 max-w-screen-md">
       <h1 className="text-3xl font-bold mb-6">{content.title}</h1>
       <TableOfContents content={contentData} />
       <div className="prose prose-lg max-w-none">

@@ -39,11 +39,11 @@ export default function HWerkCaseStudyPage() {
             <p className="text-base lg:text-lg text-muted-foreground leading-relaxed mb-4 lg:mb-6">
               Das H-Werk, ein moderner Friseursalon in der belebten Marktstraße von Lahr, nutzt seine zentrale Lage für einen stetigen Strom an Laufkundschaft. Doch um langfristig zu wachsen, war eine starke digitale Präsenz unerlässlich. Elina Sauter, die Geschäftsleiterin seit der Eröffnung im September 2019, war unsere enge Ansprechpartnerin und trieb die Vision einer nachhaltigen Kundenerweiterung voran.
             </p>
-  
+    
             <p className="leading-relaxed mb-4 lg:mb-6">
               Trotz der erstklassigen Position in der Fußgängerzone stand der Salon vor der Herausforderung, sich in einem wettbewerbsintensiven Markt abzuheben. Eine ganzheitliche Online-Strategie war der Schlüssel, um Kunden aller Altersgruppen zu erreichen und die lokale Konkurrenz zu übertrumpfen.
             </p>
-  
+    
             <div className="bg-accent/5 border-l-4 border-accent p-4 lg:p-6 my-4 lg:my-6 rounded-lg">
               <h4 className="font-semibold mb-3 text-lg">Hauptziele des Projekts</h4>
               <ul className="space-y-2 text-base">

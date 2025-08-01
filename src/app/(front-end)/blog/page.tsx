@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { Calendar, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { getPayload } from "payload";
 import payloadConfig from "@/app/payload.config";
 import HeaderSection from "@/components/sections/header-section";
@@ -54,14 +53,7 @@ export default async function BlogPage() {
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
-                    <div className="absolute top-4 left-4">
-                      <Badge
-                        variant="secondary"
-                        className="bg-primary text-primary-foreground"
-                      >
-                        {post.category}
-                      </Badge>
-                    </div>
+
                   </div>
 
                   <div className="flex flex-col flex-grow p-6">

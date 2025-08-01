@@ -31,21 +31,10 @@ export const Blog: CollectionConfig = {
             required: true,
         },
         {
-            name: 'category',
-            type: 'select',
-            options: ['Web Design', 'Web Development', 'SEO', 'Marketing', 'Other'],
-            required: true,
-        },
-        {
             name: 'tags',
             type: 'array',
             fields: [{ name: 'tag', type: 'text' }],
             required: true,
-        },
-        {
-            name: 'relatedPosts',
-            type: 'array',
-            fields: [{ name: 'post', type: 'relationship', relationTo: 'blog' }],
         },
         {
             name: 'slug',
@@ -127,9 +116,7 @@ export interface BlogPost {
     image: string;
     date: string;
     author: string;
-    category: string;
     tags: string[];
-    relatedPosts: string[];
     slug: string;
     status: string;
 }

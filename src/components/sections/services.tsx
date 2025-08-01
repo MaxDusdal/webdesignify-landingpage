@@ -54,7 +54,6 @@ export default function Services() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service) => {
-            // Get the icon component directly from lucide imports
             const Icon = getIconComponent(service.iconName);
 
             return (
@@ -63,7 +62,7 @@ export default function Services() {
                 href={service.link ?? `/services/${service.id}`}
                 className="group flex flex-col h-full"
               >
-                <div className="flex flex-col h-full rounded-lg border border-border/40 bg-card p-6 shadow-sm transition-all duration-200 hover:shadow-md ">
+                <div className="flex flex-col h-full rounded-lg border border-border bg-card p-6 shadow-md transition-all duration-200 hover:shadow-lg ">
                   <div className="mb-4 rounded-full bg-secondary p-3 w-12 h-12 flex items-center justify-center">
                     {Icon && (
                       <Icon className="h-6 w-6 text-secondary-foreground" />

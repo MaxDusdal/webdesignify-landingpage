@@ -155,15 +155,8 @@ export default function SocialProof({
         )}
 
         {/* Testimonials */}
-        <div className="grid gap-8 md:grid-cols-3 md:gap-12 pt-8">
-          <Testimonial
-            imageSrc="/placeholder.svg?height=60&width=60"
-            altText="Heinrich Dimura"
-            name="Heinrich Dimura"
-            position="Gastronom, Elzgarten & Hardys"
-            quote="Duis do adipisicing ipsum minim laborum ullamco minim irure velit amet quis ad. Exercitation cupidatat nostrud consequat sint."
-            variant={variant}
-          />
+        <div className="grid gap-8 md:grid-cols-2 md:gap-12 pt-8 max-w-screen-lg mx-auto">
+
           <Testimonial
             imageSrc="/social-proof/kevin-rueb.jpeg?height=60&width=60"
             altText="Kevin Rüb"

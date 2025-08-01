@@ -103,26 +103,26 @@ export const contactFormSchema = z.object({
   industry: z.enum([...FORM_OPTIONS.industries.map((i) => i.value)] as [
     string,
     ...string[],
-  ]),
+  ], { message: "Bitte wählen Sie eine gültige Branche aus" }),
   businessSize: z
     .enum([...FORM_OPTIONS.businessSizes.map((i) => i.value)] as [
       string,
       ...string[],
-    ])
+    ], { message: "Bitte wählen Sie eine gültige Unternehmensgröße aus" })
     .default("1-10"),
 
   // Step 3: Current Infrastructure
   hasWebsite: z.enum([...FORM_OPTIONS.hasWebsite.map((i) => i.value)] as [
     string,
     ...string[],
-  ]),
+  ], { message: "Bitte wählen Sie eine gültige Option aus" }),
   websiteUrl: z.string().optional(),
   currentMarketing: z
     .array(
       z.enum([...FORM_OPTIONS.marketingTools.map((i) => i.value)] as [
         string,
         ...string[],
-      ]),
+      ], { message: "Ungültiges Marketing-Tool ausgewählt" }),
     )
     .optional()
     .default([]),
@@ -133,21 +133,21 @@ export const contactFormSchema = z.object({
       z.enum([...FORM_OPTIONS.projectTypes.map((i) => i.value)] as [
         string,
         ...string[],
-      ]),
+      ], { message: "Ungültiger Projekttyp ausgewählt" }),
     )
-    .min(1, { message: "Bitte mindestens eine Option auswählen" }),
+    .min(1, { message: "Bitte mindestens eine Dienstleistung auswählen" }),
   timeline: z.enum([...FORM_OPTIONS.timelines.map((i) => i.value)] as [
     string,
     ...string[],
-  ]),
+  ], { message: "Bitte wählen Sie einen gültigen Zeitrahmen aus" }),
   budget: z.enum([...FORM_OPTIONS.budgets.map((i) => i.value)] as [
     string,
     ...string[],
-  ]),
+  ], { message: "Bitte wählen Sie ein gültiges Budget aus" }),
 
   // Step 5: Additional Information
-  message: z.string().optional(),
+  message: z.string().min(1, { message: "Ihre Nachricht ist erforderlich" }),
   howDidYouHear: z.enum([
     ...FORM_OPTIONS.referralSources.map((i) => i.value),
-  ] as [string, ...string[]]),
+  ] as [string, ...string[]], { message: "Bitte wählen Sie eine gültige Option aus" }),
 });

@@ -18,7 +18,7 @@ export default function ThankYouMessage() {
       <h2 className="text-2xl font-bold mb-2">Vielen Dank!</h2>
       <p className="text-muted-foreground mb-6">
         Ihre Anfrage wurde erfolgreich übermittelt. Ich melde mich innerhalb von
-        48 Stunden bei dir.
+        48 Stunden bei Ihnen.
       </p>
       <Button onClick={() => router.push("/")}>Zurück zur Startseite</Button>
     </motion.div>

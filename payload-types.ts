@@ -183,17 +183,10 @@ export interface Blog {
   };
   image: number | Media;
   date: string;
-  category: 'Web Design' | 'Web Development' | 'SEO' | 'Marketing' | 'Other';
   tags: {
     tag?: string | null;
     id?: string | null;
   }[];
-  relatedPosts?:
-    | {
-        post?: (number | null) | Blog;
-        id?: string | null;
-      }[]
-    | null;
   slug: string;
   status: 'draft' | 'published';
   author: number | Author;
@@ -245,6 +238,13 @@ export interface User {
   hash?: string | null;
   loginAttempts?: number | null;
   lockUntil?: string | null;
+  sessions?:
+    | {
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
+      }[]
+    | null;
   password?: string | null;
 }
 /**
@@ -434,17 +434,10 @@ export interface BlogSelect<T extends boolean = true> {
   content?: T;
   image?: T;
   date?: T;
-  category?: T;
   tags?:
     | T
     | {
         tag?: T;
-        id?: T;
-      };
-  relatedPosts?:
-    | T
-    | {
-        post?: T;
         id?: T;
       };
   slug?: T;
@@ -540,6 +533,13 @@ export interface UsersSelect<T extends boolean = true> {
   hash?: T;
   loginAttempts?: T;
   lockUntil?: T;
+  sessions?:
+    | T
+    | {
+        id?: T;
+        createdAt?: T;
+        expiresAt?: T;
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
