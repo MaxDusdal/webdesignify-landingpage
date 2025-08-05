@@ -4,18 +4,12 @@ import CaseStudyHero from "@/components/case-study/case-study-hero";
 import { 
   Search, 
   Star, 
-  Mail, 
   Calendar,
   TrendingUp,
-  Users,
-  Monitor,
   Smartphone,
-  Building2,
   CheckCircle,
-  AlertCircle,
   Globe,
   Clock,
-  MapPin,
   Utensils
 } from "lucide-react";
 
@@ -93,7 +87,7 @@ export default function HardysCaseStudyPage() {
                   Challenge: Unzureichendes SEO und geringe Sichtbarkeit
                 </h3>
                 <p className="leading-relaxed mb-3 lg:mb-4">
-                  Hardys belegte lediglich Platz 25 bei Google für „Restaurant Rust" (Seite 3). Da nur 0,63% der Nutzer Ergebnisse jenseits der ersten Seite anklicken, war dies eine erhebliche Schwachstelle.
+                  Hardys belegte lediglich Platz 25 bei Google für &quot;Restaurant Rust&quot; (Seite 3). Da nur 0,63% der Nutzer Ergebnisse jenseits der ersten Seite anklicken, war dies eine erhebliche Schwachstelle.
                 </p>
                 <p className="leading-relaxed">
                   <strong>Lösung:</strong> Umfassende SEO-Optimierung mit professionellen Fotos, Google My Business-Optimierung, Werbekampagnen-Verbesserung und automatisierte Bewertungsstrategie über die eigene Reservierungssoftware.
@@ -109,7 +103,7 @@ export default function HardysCaseStudyPage() {
                   Der manuelle Reservierungsprozess über Telefon, E-Mail oder einfaches Webformular verursachte erhebliche Ineffizienzen, lange Wartezeiten und hohe versteckte Prozesskosten.
                 </p>
                 <p className="leading-relaxed">
-                  <strong>Lösung:</strong> Entwicklung der innovativen Reservierungssoftware "TableTrack" mit vollautomatisierter Plattform, mehrsprachigen E-Mail-Templates und Echtzeit-Überblick für Mitarbeiter auf Mobilgeräten.
+                  <strong>Lösung:</strong> Entwicklung der innovativen Reservierungssoftware &quot;TableTrack&quot; mit vollautomatisierter Plattform, mehrsprachigen E-Mail-Templates und Echtzeit-Überblick für Mitarbeiter auf Mobilgeräten.
                 </p>
               </div>
             </div>
@@ -160,14 +154,14 @@ export default function HardysCaseStudyPage() {
                   SEO & Local Search Dominanz
                 </h3>
                 <p className="leading-relaxed mb-4 lg:mb-6">
-                  Der Fokus lag auf der Eroberung der lokalen Suchergebnisse für „Restaurant Rust". Durch strategische Optimierungen erreichten wir nicht nur Platz 1, sondern auch die besten Bewertungen in der Region.
+                  Der Fokus lag auf der Eroberung der lokalen Suchergebnisse für &quot;Restaurant Rust&quot;. Durch strategische Optimierungen erreichten wir nicht nur Platz 1, sondern auch die besten Bewertungen in der Region.
                 </p>
                 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6 text-center">
                     <div>
                       <div className="text-sm text-green-600 mb-1">Vorher: Platz 25</div>
                       <div className="text-2xl lg:text-3xl font-bold text-green-700">#1</div>
-                      <div className="text-sm lg:text-base text-green-600">Google-Ranking für „Restaurant Rust"</div>
+                      <div className="text-sm lg:text-base text-green-600">Google-Ranking für &quot;Restaurant Rust&quot;</div>
                     </div>
                     <div>
                       <div className="text-2xl lg:text-3xl font-bold text-green-700">500+</div>
@@ -227,7 +221,7 @@ export default function HardysCaseStudyPage() {
                 </div>
                 <div className="text-3xl font-bold mb-1">#1</div>
                 <div className="text-sm font-medium">Google-Ranking</div>
-                <div className="text-xs text-muted-foreground">Für „Restaurant Rust"</div>
+                <div className="text-xs text-muted-foreground">Für &quot;Restaurant Rust&quot;</div>
               </div>
               
               <div className="text-center p-4">
